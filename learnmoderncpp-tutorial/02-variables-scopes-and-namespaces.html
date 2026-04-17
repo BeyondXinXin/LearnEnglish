@@ -1,0 +1,1695 @@
+<!DOCTYPE html><html lang="zh" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="mkdocs教程，markdown教程，markdown生成PPT、静态网站、图表、思维导图，markdown编写AI结构化提示词">
+      
+      
+        <meta name="author" content="Aaron Wang">
+      
+      
+        <link rel="canonical" href="https://hongjun.vip/learnmoderncpp-tutorial/02-variables-scopes-and-namespaces.html">
+      
+      
+      
+      
+        
+          <link rel="alternate" href=".." hreflang="zh">
+        
+          <link rel="alternate" href=".." hreflang="en">
+        
+          <link rel="alternate" href=".." hreflang="de">
+        
+          <link rel="alternate" href=".." hreflang="ru">
+        
+          <link rel="alternate" href=".." hreflang="ja">
+        
+          <link rel="alternate" href=".." hreflang="nl">
+        
+          <link rel="alternate" href=".." hreflang="fr">
+        
+          <link rel="alternate" href=".." hreflang="es">
+        
+          <link rel="alternate" href=".." hreflang="pt">
+        
+          <link rel="alternate" href=".." hreflang="ar">
+        
+          <link rel="alternate" href=".." hreflang="ko">
+        
+      
+      
+      
+        
+        
+        
+          <link rel="icon" href="../assets/images/favicon.png">
+        
+      
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-materialx-10.1.3">
+    
+    
+      
+        <title>Variables, Scopes and Namespaces - 文档即产品</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.4dadc26f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.204eaadb.min.css">
+      
+    
+    
+
+    
+
+    
+      
+        <script src="https://unpkg.com/iframe-worker/shim"></script>
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../site-plugin/katex/katex.min.css">
+    
+      <link rel="stylesheet" href="../assets/document_dates/fonts/material-icons.css">
+    
+      <link rel="stylesheet" href="../assets/document_dates/tippy/material.css">
+    
+      <link rel="stylesheet" href="../assets/document_dates/tippy/shift-away.css">
+    
+      <link rel="stylesheet" href="../assets/document_dates/tippy/tippy.css">
+    
+      <link rel="stylesheet" href="../assets/document_dates/tippy/scale.css">
+    
+      <link rel="stylesheet" href="../assets/document_dates/tippy/light.css">
+    
+      <link rel="stylesheet" href="../assets/document_dates/tippy/backdrop.css">
+    
+      <link rel="stylesheet" href="../assets/document_dates/core/core.css">
+    
+      <link rel="stylesheet" href="../assets/document_dates/user.config.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+        </style></head>
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" data-mx-topbar="glass">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="toc" type="checkbox" id="__toc" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <label class="md-overlay" for="__toc"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#Variables-Scopes-and-Namespaces" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../index.html" title="文档即产品" class="md-header__button md-logo" aria-label="文档即产品" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.03 2.59a1.5 1.5 0 0 1 1.94 0l7.5 6.363a1.5 1.5 0 0 1 .53 1.144V19.5a1.5 1.5 0 0 1-1.5 1.5h-5.75a.75.75 0 0 1-.75-.75V14h-2v6.25a.75.75 0 0 1-.75.75H4.5A1.5 1.5 0 0 1 3 19.5v-9.403c0-.44.194-.859.53-1.144ZM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v6.25h5v-9.403Z"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            文档即产品
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Variables, Scopes and Namespaces
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="自动模式 - 随系统主题色" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="自动模式 - 随系统主题色" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue" aria-label="亮色模式" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="亮色模式" for="__palette_2" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="cyan" data-md-color-accent="cyan" aria-label="暗色模式" type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="暗色模式" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="选择当前语言">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"></path></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="zh" class="md-select__link">
+              🇨🇳 中文
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="en" class="md-select__link">
+              🇺🇸 English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="de" class="md-select__link">
+              🇩🇪 Deutsch
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="ru" class="md-select__link">
+              🇷🇺 Русский
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="ja" class="md-select__link">
+              🇯🇵 日本語
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="nl" class="md-select__link">
+              🇳🇱 Dutch
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="fr" class="md-select__link">
+              🇫🇷 Français
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="es" class="md-select__link">
+              🇪🇸 Español
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="pt" class="md-select__link">
+              🇧🇷 Português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="ar" class="md-select__link">
+              🇸🇦 العربية
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="ko" class="md-select__link">
+              🇰🇷 한국어
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.25 2a8.25 8.25 0 0 1 6.34 13.53l5.69 5.69a.749.749 0 0 1-.326 1.275.75.75 0 0 1-.734-.215l-5.69-5.69A8.25 8.25 0 1 1 10.25 2M3.5 10.25a6.75 6.75 0 1 0 13.5 0 6.75 6.75 0 0 0-13.5 0"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.25 2a8.25 8.25 0 0 1 6.34 13.53l5.69 5.69a.749.749 0 0 1-.326 1.275.75.75 0 0 1-.734-.215l-5.69-5.69A8.25 8.25 0 1 1 10.25 2M3.5 10.25a6.75 6.75 0 1 0 13.5 0 6.75 6.75 0 0 0-13.5 0"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jaywhj" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    aaron - repo
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../materialx-for-mkdocs.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  下一代主题插件 MaterialX
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../markdown.md" class="md-tabs__link">
+          
+  
+  
+  Markdown 系列
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../recently-updated-zh.md" class="md-tabs__link">
+          
+  
+  
+  效率提升
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../RECENTLY_UPDATED.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  最近更新
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="文档即产品" class="md-nav__button md-logo" aria-label="文档即产品" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.03 2.59a1.5 1.5 0 0 1 1.94 0l7.5 6.363a1.5 1.5 0 0 1 .53 1.144V19.5a1.5 1.5 0 0 1-1.5 1.5h-5.75a.75.75 0 0 1-.75-.75V14h-2v6.25a.75.75 0 0 1-.75.75H4.5A1.5 1.5 0 0 1 3 19.5v-9.403c0-.44.194-.859.53-1.144ZM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v6.25h5v-9.403Z"></path></svg>
+
+    </a>
+    文档即产品
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jaywhj" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    aaron - repo
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../materialx-for-mkdocs.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    下一代主题插件 MaterialX
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Markdown 系列
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Markdown 系列
+  
+
+          </label>
+          <ul class="md-nav__list">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../markdown.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Markdown 实用语法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../document-dates-zh.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日期作者头像插件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    效率提升
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    效率提升
+  
+
+          </label>
+          <ul class="md-nav__list">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recently-updated-zh.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    最近更新列表插件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hainan.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    海南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RECENTLY_UPDATED.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    最近更新
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc">
+      
+        <li class="md-nav__item">
+  <a href="#Declarations-definitions-and-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Declarations, definitions and assignment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Casts-and-uniform-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Casts and uniform initialization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Numeric-types-and-type-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Numeric types and type inference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Bool-and-byte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bool and byte
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Literal-prefixes-and-suffixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Literal prefixes and suffixes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Local-and-global-scopes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local and global scopes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Static-and-thread-local-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Static and thread-local variables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Namespaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Namespaces
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Constants-and-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constants and references
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Constexpr-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constexpr variables
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+  
+
+
+<h1 id="Variables-Scopes-and-Namespaces">Variables, Scopes and Namespaces<a class="headerlink" href="#Variables-Scopes-and-Namespaces" title="Permanent link">¶</a></h1>
+<div class="document-dates-plugin-wrapper document-dates-top"><div class="document-dates-plugin" locale=""><div class="dd-left"><span class="dd-item" data-tippy-content="" data-tippy-raw="2026-04-17"><span class="material-icons" data-icon="doc_created"></span><time datetime="2026-04-17T14:15:10+08:00"></time></span><span class="dd-item" data-tippy-content="" data-tippy-raw="2026-04-17"><span class="material-icons" data-icon="doc_updated"></span><time datetime="2026-04-17T06:15:10+00:00"></time></span></div><div class="dd-right"><span class="material-icons" data-icon="doc_author"></span><div class="author-group"><div class="avatar-wrapper" data-name="yaoxin" data-tippy-content="" data-tippy-raw="&lt;a href=&quot;mailto:yaoxin@rossumrobot.cn&quot;&gt;yaoxin&lt;/a&gt;"><span class="avatar-text"></span><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="" data-desc-position="bottom"><img class="avatar" data-src="" data-email="yaoxin@rossumrobot.cn"></a></div></div></div></div></div>
+
+<h2 id="Declarations-definitions-and-assignment">Declarations, definitions and assignment<a class="headerlink" href="#Declarations-definitions-and-assignment" title="Permanent link">¶</a></h2>
+<p>A variable is a named entity which can hold a value; thus it has <em>state</em>. As the name "variable" suggests, this value can, and often does, change during the entity's lifetime. A <em>declaration</em> can be thought of as introducing a variable to your program, as if it is saying: "I exist with this name and have such-and-such type, use me." On the other hand, a <em>definition</em> is <strong>everything</strong> a declaration is, plus asking: "Please reserve some memory for me here." Additionally, an <em>assignment</em> can be combined with a definition, thus stating "I have this initial value from now until (optional) later reassignment (unless I am a constant)." Defining a variable without giving it an initial value is usually best avoided, as the variable will likely contain random garbage (dereferencing an uninitialized variable causes undefined behavior in C++; your compiler can and often will warn of this). Declarations that are not also definitions are rare for variables of the built-in types, so we will omit further discussion of them here.</p>
+<p>C++ is a statically typed language, meaning that the type of each variable is known at compile time (importantly, this is also true of variables defined with the keyword <code>auto</code>, see later). Due to the fact the types are known and fixed, the amount of memory needed for each variable is known at compile time too; this specific amount of memory is called the variable's <em>storage class</em>. (Storage class applies to <strong>all</strong> user-defined types, too.) This fact gives rise to the <em>One Definition Rule</em> (ODR) which states that a variable can be declared or assigned to multiple times, but must be defined <strong>exactly</strong> once. This is the key concept concerning memory usage of variables in C++, so remember the ODR. By default, C++ reserves space for new local (function or sub-scope) variables on the <em>stack</em>, which means that two variables of the same name can exist in different scopes (one scope enclosing the other); however the <em>address</em> of the variable which is always unique. The other place variables can be stored is on the <em>heap</em>, which is often preferable for large objects or arrays. Again these variables always have a unique address, but continue to use memory until it is explicitly deallocated, with the responsibility being the programmer's, not the C++ runtime.</p>
+<p>The shortest possible name or <em>identifier</em> for a variable is a single letter, and these are often the name of choice for variables whose purpose is obvious (such as a loop counter); this convention also provides a symmetry with variable names in Mathematics. Variable names must start with a lower- or uppercase letter or an underscore, followed by an arbitrary number of lower- or uppercase letters, underscores or decimal digits in any order.</p>
+<p>Reserved names that should not be used as identifiers are:</p>
+<ul>
+<li>Any of the C++ keywords (of which there are just under a hundred at the time of writing).</li>
+<li>Names beginning with an underscore followed by a capital letter (these are reserved for the Standard Library).</li>
+<li>Names containing adjacent double underscores (reserved for purposes such as name mangling).</li>
+<li>At <strong>global scope</strong> any name beginning with an underscore.</li>
+</ul>
+<p>Use of top-bit-set characters (including UTF-8 sequences) <strong>is</strong> permitted in variable names with more recent compilers, including as the initial character; such sequences are also recognized by the preprocessor.</p>
+<p>Unlike some programming languages, C++ does not mandate different uses of capital letters and so on for different types of entity, but your organization may well follow conventions such as constants in upper case, user-defined types in sentence case and member functions in camel case. The rules for identifiers are the same for <code>class</code>, <code>struct</code>, <code>enum</code> and <code>union</code> names, function names, namespace names and macro names. Different variable naming styles, the use of which may fall under coding standards requirements at your employer, are listed in the following table:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Naming Style</th>
+<th style="text-align: center;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Lower Case</td>
+<td style="text-align: center;">avariablename</td>
+</tr>
+<tr>
+<td style="text-align: center;">Sentence Case</td>
+<td style="text-align: center;">AVariableName</td>
+</tr>
+<tr>
+<td style="text-align: center;">Upper Case</td>
+<td style="text-align: center;">AVARIABLENAME</td>
+</tr>
+<tr>
+<td style="text-align: center;">Snake Case</td>
+<td style="text-align: center;">a_variable_name</td>
+</tr>
+<tr>
+<td style="text-align: center;">Upper Snake Case</td>
+<td style="text-align: center;">A_VARIABLE_NAME</td>
+</tr>
+<tr>
+<td style="text-align: center;">Camel Case</td>
+<td style="text-align: center;">aVariableName</td>
+</tr>
+</tbody>
+</table>
+<p>New variables are introduced (defined) by providing a type, an identifier and, optionally (but highly recommended) either an initial value after an equals sign (<code>=</code>), and/or within or a pair of braces <code>{</code> and <code>}</code> (which can be empty to assign the default value for the type). Use of equals is historical syntax, while use of braces (where the equals sign becomes optional) is called <em>uniform initialization</em> and is discussed on more detail later in this Chapter.</p>
+<p>Braces are also used with strings passed to <code>print()</code> and <code>println()</code> indicating a point in the string where a variable's current value should be substituted. The number of brace pairs must equal the number of additional parameters passed to the functions. (To output a literal <code>{</code> or <code>}</code> use one of the escape sequences <code>{{</code> or <code>}}</code> respectively.)</p>
+<p>The following program defines three variables but only assigns to two of them initially, despite the fact that it prints them all out twice:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><a href="#__codelineno-0-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="c1">// 02-assign.cpp : assign to local variables</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><a href="#__codelineno-0-2"><span class="linenos" data-linenos=" 2 "></span></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a><a href="#__codelineno-0-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;print&gt;</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><a href="#__codelineno-0-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><a href="#__codelineno-0-5"><span class="linenos" data-linenos=" 5 "></span></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a><a href="#__codelineno-0-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a><a href="#__codelineno-0-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a><a href="#__codelineno-0-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">k</span><span class="p">;</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a><a href="#__codelineno-0-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"(1) i = {}, j = {}, k = {}"</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">);</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a><a href="#__codelineno-0-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j</span><span class="p">;</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a><a href="#__codelineno-0-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12"></a><a href="#__codelineno-0-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">    </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13"></a><a href="#__codelineno-0-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"(2) i = {}, j = {}, k = {}"</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">);</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a><a href="#__codelineno-0-14"><span class="linenos" data-linenos="14 "></span></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Running this program produced the output:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><a href="#__codelineno-1-1"><span class="linenos" data-linenos="1 "></span></a>(1) i = 1, j = 2, k = 16151149
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><a href="#__codelineno-1-2"><span class="linenos" data-linenos="2 "></span></a>(2) i = 2, j = 3, k = 4294967295
+</span></code></pre></div>
+<p>There are probably no surprises for the values of <code>i</code> and <code>j</code> as output the first and second time. Note that the statement <code>i = j</code> merely assigns the <strong>current</strong> value of <code>j</code> to <code>i</code> and does not imply that they point to the same object; the values of <code>i</code> and <code>j</code> can subsequently change <strong>independently</strong>.</p>
+<p>The first time <code>k</code> is output its value is essentially random, an example of <em>undefined behavior</em> (UB); nothing can be guaranteed about its value other than it is within the valid range for the <code>unsigned</code> type. Assigning a negative number to an <code>unsigned</code> type is (perhaps surprisingly) legal C++, and if you are unsure of why the second output of <code>k</code> is what it is, you may want to do some research into "two's-complement" binary representation of integers (it's actually the number 2<sup>32</sup>-1 represented as a positive integer).</p>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>Fix this program by giving <code>k</code> an initial value. Experiment with positive and negative integers. What do you learn about the <code>unsigned</code> type?</p>
+</li>
+<li>
+<p>Now unfix it by no longer giving <code>j</code> an initial value. How is <code>i</code> affected at <code>(2)</code>?</p>
+</li>
+<li>
+<p>Now fix it again by adding the line: <code>int j{};</code> between <code>int i</code> and <code>unsigned k</code>. What else has to be changed? Is this the ODR manifesting itself?</p>
+</li>
+</ul>
+<h2 id="Casts-and-uniform-initialization">Casts and uniform initialization<a class="headerlink" href="#Casts-and-uniform-initialization" title="Permanent link">¶</a></h2>
+<p>The following program assigns an integer to a variable <code>a</code> of type <code>int</code>, and a real number to a variable <code>b</code> of type <code>double</code>. In case you're wondering, the name for the type of <code>b</code> comes from <em>double precision</em> as defined in the IEEE Standard for Floating-Point Arithmetic (IEEE 754), which defines how an (accurate) approximation of a real number is stored in 64 bits of memory. Single precision <code>float</code> uses 32 bits, and extended precision <code>long double</code> typically uses up to 96 bits (the storage class may be different from the number of precision bits used). The initial values of <code>a</code> and <code>b</code> are then reassigned to each other, meaning the second output line is different:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><a href="#__codelineno-2-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="c1">// 02-swap.cpp : attempt to swap the values of an int and a double</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a><a href="#__codelineno-2-2"><span class="linenos" data-linenos=" 2 "></span></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a><a href="#__codelineno-2-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;print&gt;</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a><a href="#__codelineno-2-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a><a href="#__codelineno-2-5"><span class="linenos" data-linenos=" 5 "></span></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a><a href="#__codelineno-2-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7"></a><a href="#__codelineno-2-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a><a href="#__codelineno-2-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.5</span><span class="p">;</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9"></a><a href="#__codelineno-2-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"(1) a = {}, b = {}"</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10"></a><a href="#__codelineno-2-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.5</span><span class="p">;</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11"></a><a href="#__codelineno-2-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12"></a><a href="#__codelineno-2-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"(2) a = {}, b = {}"</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13"></a><a href="#__codelineno-2-13"><span class="linenos" data-linenos="13 "></span></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Running this program produces the output:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><a href="#__codelineno-3-1"><span class="linenos" data-linenos="1 "></span></a>(1) a = 1, b = 2.5
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a><a href="#__codelineno-3-2"><span class="linenos" data-linenos="2 "></span></a>(2) a = 2, b = 1
+</span></code></pre></div>
+<p>The variable assignment statement <code>a = 2.5</code> is called a <em>narrowing cast</em> because of the reduction in precision and likelihood of information being lost. In this case the value is <strong>automatically</strong> <em>truncated</em> from <code>2.5</code> to <code>2</code>, as the decimal part cannot be represented in an <code>int</code>. Even though the term being assigned is floating-point (actually it's a double-precision literal, see later in this Chapter) the type of <code>a</code> <strong>remains</strong> as <code>int</code> (and this is why the fractional part is lost). In contrast, the statement <code>b = 1</code> is a <em>widening cast</em> with the assumption that there is no chance of information being lost; <code>b</code> remains of type <code>double</code> holding an integer value (which could be represented explictly as a literal <code>1.0</code>). Both of these casts are <em>implicit casts</em> becuase the compiler makes them happen automatically; the instruction to carry out the type casting is implicit. (We could have used a more verbose <code>static_cast&lt;int&gt;(2.5)</code> and <code>static_cast&lt;double&gt;(1)</code> to make the casts explicit, we'll see this later.)</p>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>Modify this program so that no narrowing casts occur.</p>
+</li>
+<li>
+<p>Now modify this program again to produce only integer outputs.</p>
+</li>
+<li>
+<p>Again, modify the original program to use <code>static_cast</code>. (Hint: don't worry if you don't fully understand the syntax yet.)</p>
+</li>
+</ul>
+<p>Implicit casts can happen with variable initialization-and-assignment too, however this is not always the behavior we want. To force the compiler to disallow (possibly unintentional) narrowing casts we can use <em>uniform initialization</em> which involves enclosing the assigned value in curly braces:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a><a href="#__codelineno-4-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="c1">// 02-uniform.cpp : avoid compiler error with uniform initialization and explicit narrowing cast</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2"></a><a href="#__codelineno-4-2"><span class="linenos" data-linenos=" 2 "></span></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3"></a><a href="#__codelineno-4-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;print&gt;</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4"></a><a href="#__codelineno-4-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5"></a><a href="#__codelineno-4-5"><span class="linenos" data-linenos=" 5 "></span></a>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6"></a><a href="#__codelineno-4-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7"></a><a href="#__codelineno-4-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="c1">// int c = { 2.5 };                 // Error: this does NOT compile</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8"></a><a href="#__codelineno-4-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mf">2.5</span><span class="p">)</span><span class="w"> </span><span class="p">};</span><span class="w">  </span><span class="c1">// while this does</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9"></a><a href="#__codelineno-4-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">};</span><span class="w">                   </span><span class="c1">// and so does this</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10"></a><a href="#__codelineno-4-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"c = {}, d = {}"</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">);</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11"></a><a href="#__codelineno-4-11"><span class="linenos" data-linenos="11 "></span></a><span class="p">}</span>
+</span></code></pre></div>
+<p>It is important not to confuse a single value in curly braces with an initializer list containing one element when reading code like this; in practice here there is no ambiguity because if we had wanted to initialize an array of <code>int</code> a single element list we would have written <code>int c[] = {2.5,};</code> using a trailing comma inside the braces. Interestingly, the equals sign in uniform initialization is in fact <strong>optional</strong>, so we could have written <code>int c{2.5}</code> and <code>double d{1}</code>. Uniform initialization appears elsewhere in C++ so it is a good idea to become familiar with the syntax early on, and know the nuances of its behavior compared to using a time-honored C-style equals sign instead. In Modern C++, uniform initialization is probably considered better style, where you have the choice of the two.</p>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>Change <code>int c</code> to <code>float c</code> in the above code. Does this fix the problem? Are you surprised by this?</p>
+</li>
+<li>
+<p>Fix the code so that it compiles with <code>float c</code> (read on if not sure, and think "float literal").</p>
+</li>
+<li>
+<p>Now change <code>{1}</code> to <code>{1LL}</code>. Does the code still compile? Try to fix this.</p>
+</li>
+</ul>
+<h2 id="Numeric-types-and-type-inference">Numeric types and type inference<a class="headerlink" href="#Numeric-types-and-type-inference" title="Permanent link">¶</a></h2>
+<p>C++ has quite a lot of built-in types, most of them inherited from the C language; so far we've met <code>char</code>, <code>int</code>, <code>unsigned</code>, <code>float</code>  and <code>double</code>. On most platforms, integer types can be 8, 16, 32 or 64 bits <em>wide</em> in signed and unsigned types, while floating point types of 32, 64 and 96 bits wide are usually available. The table below lists many of the built-in types in C++ together with their typical properties (on most modern machines) and <em>numeric literal</em> forms:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Type</th>
+<th style="text-align: center;">Typical Bits</th>
+<th style="text-align: center;">Minimum Value</th>
+<th style="text-align: center;">Maximum Value</th>
+<th style="text-align: center;">Example Literal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">signed char</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">-128</td>
+<td style="text-align: center;">127</td>
+<td style="text-align: center;">'\x20'</td>
+</tr>
+<tr>
+<td style="text-align: center;">unsigned char</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">255</td>
+<td style="text-align: center;">'\xa0'</td>
+</tr>
+<tr>
+<td style="text-align: center;">short</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">-32768</td>
+<td style="text-align: center;">32767</td>
+<td style="text-align: center;">n/a (as for int)</td>
+</tr>
+<tr>
+<td style="text-align: center;">unsigned short</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">65535</td>
+<td style="text-align: center;">n/a (as for unsigned)</td>
+</tr>
+<tr>
+<td style="text-align: center;">int</td>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">-2147483648</td>
+<td style="text-align: center;">2147483647</td>
+<td style="text-align: center;">-1000, 0x7fff</td>
+</tr>
+<tr>
+<td style="text-align: center;">unsigned</td>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">4294967295</td>
+<td style="text-align: center;">1000U, 0xffffU</td>
+</tr>
+<tr>
+<td style="text-align: center;">long</td>
+<td style="text-align: center;">64 (32) +</td>
+<td style="text-align: center;">-2147483648</td>
+<td style="text-align: center;">2147483647</td>
+<td style="text-align: center;">1L, 0x7fffffffL</td>
+</tr>
+<tr>
+<td style="text-align: center;">unsigned long</td>
+<td style="text-align: center;">64 (32) +</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">4294967295</td>
+<td style="text-align: center;">10000000UL, 0xbbbfUL</td>
+</tr>
+<tr>
+<td style="text-align: center;">long long</td>
+<td style="text-align: center;">64 +</td>
+<td style="text-align: center;">-9223372036854775808</td>
+<td style="text-align: center;">9223372036854775807</td>
+<td style="text-align: center;">-10000LL, 0x80000000000LL</td>
+</tr>
+<tr>
+<td style="text-align: center;">unsigned long long</td>
+<td style="text-align: center;">64 +</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">18446744073709551615</td>
+<td style="text-align: center;">10000ULL, 0x7fffffffffULL</td>
+</tr>
+<tr>
+<td style="text-align: center;">ssize_t</td>
+<td style="text-align: center;">64 (32)</td>
+<td style="text-align: center;">-9223372036854775808</td>
+<td style="text-align: center;">9223372036854775807</td>
+<td style="text-align: center;">0Z *</td>
+</tr>
+<tr>
+<td style="text-align: center;">size_t</td>
+<td style="text-align: center;">64 (32)</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">18446744073709551615</td>
+<td style="text-align: center;">0UZ *</td>
+</tr>
+<tr>
+<td style="text-align: center;">float</td>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">1.17549e-38</td>
+<td style="text-align: center;">3.40282e+38</td>
+<td style="text-align: center;">0.f, 3.2e-10f</td>
+</tr>
+<tr>
+<td style="text-align: center;">double</td>
+<td style="text-align: center;">64</td>
+<td style="text-align: center;">2.22507e-308</td>
+<td style="text-align: center;">1.79769e+308</td>
+<td style="text-align: center;">2.3, 1.2345e200</td>
+</tr>
+<tr>
+<td style="text-align: center;">long double</td>
+<td style="text-align: center;">128</td>
+<td style="text-align: center;">3.3621e-4932</td>
+<td style="text-align: center;">1.18973e+4932</td>
+<td style="text-align: center;">100000000.5L, 0.0000345L</td>
+</tr>
+</tbody>
+</table>
+<p>* The "size types" <code>std::size_t</code> (unsigned) and <code>std::ssize_t</code> (signed) are from the Standard Library, and so require a header which defines them, such as <code>&lt;cstddef&gt;</code>. (Negative values for <code>std::ssize_t</code> are typically used to represent error values.)</p>
+<p>+ On 32-bit machines <code>long</code>, <code>unsigned long</code>, <code>ssize_t</code> and <code>size_t</code> are usually 32 bits, and are usually 64 bits on 64-bit machines, while <code>long long</code> and <code>unsigned long long</code> are guaranteed to be (at least) 64 bits on all platforms.</p>
+<p>The variable definition <code>double n{2.3};</code> should by now appear familiar and correct; it assigns a floating-point number (actually as shown in the table, a numeric literal) to a double precision variable. In other words it's an exact match between the declared type and the literal type. (If it were a narrowing cast, such as <code>double n{2.3L}</code> we would expect compilation to fail.)</p>
+<p>The <code>auto</code> type specifier has a specific meaning in Modern C++: deduce the type of the variable being assigned <strong>to</strong> from the value, variable or expression being assigned <strong>from</strong>. This means, however, that the variable definition must also <em>always be an assignment</em> as uninitialized <code>auto</code> variables are not allowed. The reason for this is simple: C++ variables must have their type known at compile time, and this is no different for <code>auto</code> variables. I'll repeat this as it is so important; <em>C++ is a statically typed language, and every available use of</em> <code>auto</code> <em>does not change this</em>.</p>
+<p>Some example usage of <code>auto</code> is shown here:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a><a href="#__codelineno-5-1"><span class="linenos" data-linenos="1 "></span></a><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">     </span><span class="c1">// both i and 1 are of type int</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a><a href="#__codelineno-5-2"><span class="linenos" data-linenos="2 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">    </span><span class="c1">// j is also of type int</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3"></a><a href="#__codelineno-5-3"><span class="linenos" data-linenos="3 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">k</span><span class="p">{</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// k has type double (using uniform initialization syntax)</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4"></a><a href="#__codelineno-5-4"><span class="linenos" data-linenos="4 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">q</span><span class="p">;</span><span class="w">        </span><span class="c1">// Error: will not compile</span>
+</span></code></pre></div>
+<p>Programs can be (re-)written without any use of <code>auto</code>, however preferring <code>auto</code> in Modern C++ is motivated primarily by correctness, performance, maintainability, and robustness, rather than just typing convenience. It is especially useful where the type in question is overly verbose, such as when using types related to generic classes, and also helps avoid accidental narrowing conversions or commitment to implementation-specific types. Notice from the example shown here the use of uniform initialization syntax with <code>auto</code>-assignment for the variable <code>k</code>; this usage can be expected to become more common.</p>
+<h2 id="Bool-and-byte">Bool and byte<a class="headerlink" href="#Bool-and-byte" title="Permanent link">¶</a></h2>
+<p>The boolean type can hold one of exactly two values: <code>true</code> and <code>false</code>; these map directly to <code>int</code> values of <code>1</code> and <code>0</code> respectively. (Note: <strong>not</strong> <code>-1</code>.) A variable defined as <code>bool</code> can be used to hold the result of a conditional expression (we'll meet conditions in the next Chapter).</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a><a href="#__codelineno-6-1"><span class="linenos" data-linenos="1 "></span></a><span class="kt">bool</span><span class="w"> </span><span class="n">success</span><span class="p">{</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2"></a><a href="#__codelineno-6-2"><span class="linenos" data-linenos="2 "></span></a><span class="kt">bool</span><span class="w"> </span><span class="n">are_equal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+</span></code></pre></div>
+<p>The <code>byte</code> type, often referred to as <code>std::byte</code> as it is a type made available from within the Standard Library namespace (in order to avoid name clashes with existing code), designed to replace <code>unsigned char</code> where the variable (or array) contains (8-bit) binary data.</p>
+<p>This type is actually implemented as an <code>enum class</code> (see Chapter 6) and only the bitwise operators are supported, so addition or subtraction of <code>byte</code> values is not allowed. A variable of type <code>byte</code> can be initialized with any value from <code>0</code> to <code>255</code> and converted back to an integer value with the function <code>to_integer()</code> (functions are covered in Chapter 4).</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a><a href="#__codelineno-7-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">std</span><span class="o">::</span><span class="n">byte</span><span class="w"> </span><span class="n">b</span><span class="p">{</span><span class="w"> </span><span class="mi">254</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2"></a><a href="#__codelineno-7-2"><span class="linenos" data-linenos="2 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_integer</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">b</span><span class="p">);</span><span class="w"> </span><span class="c1">// This is ugly but is shown here for reference</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3"></a><a href="#__codelineno-7-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">                                  </span><span class="c1">// You can compare it with static_cast&lt;T&gt;()</span>
+</span></code></pre></div>
+<h2 id="Literal-prefixes-and-suffixes">Literal prefixes and suffixes<a class="headerlink" href="#Literal-prefixes-and-suffixes" title="Permanent link">¶</a></h2>
+<p>Digits can be grouped, for example into groups of three for decimal numbers, using apostrophe (<code>'</code>) as the delimiter:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a><a href="#__codelineno-8-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">million</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1'000'000</span><span class="p">;</span>
+</span></code></pre></div>
+<p>This syntax is <strong>only</strong> for numeric literals embedded within code, not for numbers read from the keyboard or a file using stream input.</p>
+<p>If some of the example literals in the last table look unfamiliar then the following two tables should help explain. Prefixes can be applied which specify the number base of the literal; <code>0</code> and <code>0b</code>/<code>0B</code> are for <strong>integer</strong> types only:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Prefix</th>
+<th style="text-align: center;">Base</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0b, 0B</td>
+<td style="text-align: center;">Binary</td>
+</tr>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">Octal</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x, 0X</td>
+<td style="text-align: center;">Hexadecimal</td>
+</tr>
+</tbody>
+</table>
+<p>(Note: hexadecimal floating-point literals use <code>P</code> or <code>p</code> as the radix separator, while decimal floating point literals use an <code>E</code> or <code>e</code> to separate the exponent from the mantissa.)</p>
+<p>Suffixes can apply to either integer or floating point literals (or to both in the case of <code>L</code>). Also, <code>U</code> and <code>u</code> can be combined with <code>L</code>, <code>l</code>, <code>LL</code>, <code>ll</code>, <code>Z</code> and <code>z</code>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Suffix</th>
+<th style="text-align: center;">Meaning</th>
+<th style="text-align: center;">Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">f, F</td>
+<td style="text-align: center;">single-precision float</td>
+<td style="text-align: center;">3.3f, -0.0123F</td>
+</tr>
+<tr>
+<td style="text-align: center;">l, L</td>
+<td style="text-align: center;">extended precision float OR long integer</td>
+<td style="text-align: center;">100'000l, 3.3L</td>
+</tr>
+<tr>
+<td style="text-align: center;">u, U</td>
+<td style="text-align: center;">unsigned integer</td>
+<td style="text-align: center;">65536u, -1U</td>
+</tr>
+<tr>
+<td style="text-align: center;">ll, LL</td>
+<td style="text-align: center;">long long integer (64 bits)</td>
+<td style="text-align: center;">0ll, -1'234'567LL</td>
+</tr>
+<tr>
+<td style="text-align: center;">uz, UZ</td>
+<td style="text-align: center;">unsigned size type (std::size_t)</td>
+<td style="text-align: center;">0uz, 4'294'967'296UZ</td>
+</tr>
+<tr>
+<td style="text-align: center;">z, Z</td>
+<td style="text-align: center;">signed size type (std::ssize_t)</td>
+<td style="text-align: center;">0z, -2'147'483'648Z</td>
+</tr>
+</tbody>
+</table>
+<p>Note there is no literal for <code>short int</code> and there is unlikely to ever be one, as the <code>s</code> suffix is used for seconds when using the <code>&lt;chrono&gt;</code> header (and <code>string</code> when used with the <code>&lt;string&gt;</code> header). Also, the integer literal suffixes don't ever actually need to be used in Modern C++, source-code literals in all bases are automatically <em>promoted</em> (widened) to a type that can hold the value of the literal.</p>
+<p>To enable all the literal suffixes in the Standard Library after referencing the necessary header(s) use:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1"></a><a href="#__codelineno-9-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="o">::</span><span class="nn">literals</span><span class="p">;</span><span class="w">  </span><span class="c1">// This is also implied by "using namespace std;"</span>
+</span></code></pre></div>
+<p>Note: this is <strong>not</strong> necessary for suffixes of the built-in types, being <code>F</code>, <code>f</code>, <code>U</code>, <code>u</code>, <code>L</code>, <code>l</code>, <code>LL</code> and <code>ll</code>.</p>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>Make up some variable assignments from various literals. Use <code>auto</code>, and output the variables using <code>print()</code>. See if the output is what you expected.</p>
+</li>
+<li>
+<p>Now specify the correct built-in type instead of <code>auto</code>, such as <code>long long</code>. Check the tables above if you're not sure, and use uniform initialization. Try to avoid always using the biggest types <code>long long</code> and <code>long double</code> regardless of the value or calculation, as this may not be optimal in terms of memory footprint and performance.</p>
+</li>
+</ul>
+<h2 id="Local-and-global-scopes">Local and global scopes<a class="headerlink" href="#Local-and-global-scopes" title="Permanent link">¶</a></h2>
+<p>Variables defined outside of any function scope are called <em>global</em> variables, while those defined within functions (including <code>main()</code>) are called <em>local</em> variables. Global variables have memory reserved for them and are initialized before <code>main()</code> is entered, although the order in which they are initialized is <strong>not</strong> guaranteed across multiple translation units (these being approximately C++ source files, discussed later in this Chapter). Local variables have space reserved for their contents from the function stack when the function is entered, and are available for use after program flow reaches their definition within the function.</p>
+<p>A local variable with the same name as a previously defined global variable temporarily takes precedence over, or <em>shadows</em>, the global variable until it goes <em>out of scope</em>. Variables defined within a function go out of scope at the end of the function, and the space reserved for them is then released.</p>
+<p>It is also possible to nest scopes within functions up to an arbitrary level. The delimiters <code>{</code> and <code>}</code> are used for this purpose, mirroring their use to introduce a function scope. Code within <em>sub-scopes</em> is typically written indented to an extra level. (Sub-scopes which can contain scoped variable definitions are also introduced by a variety of C++ keywords including <code>if</code> and <code>while</code>.) Variable names which are re-defined within sub-scopes lose visibility at the closing brace and can no longer be referenced (the memory they use may not be released until the function exits, however).</p>
+<p>The following program defines and initializes the variable <code>a</code> three times. This does not violate the One Definition Rule (ODR) because of one simple fact: <em>the three variables exist in different scopes</em>.</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1"></a><a href="#__codelineno-10-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="c1">// 02-scopes.cpp : define three variables with the same name in one program</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2"></a><a href="#__codelineno-10-2"><span class="linenos" data-linenos=" 2 "></span></a>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3"></a><a href="#__codelineno-10-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;print&gt;</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4"></a><a href="#__codelineno-10-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5"></a><a href="#__codelineno-10-5"><span class="linenos" data-linenos=" 5 "></span></a>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6"></a><a href="#__codelineno-10-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="p">{</span><span class="w"> </span><span class="mf">1.5f</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7"></a><a href="#__codelineno-10-7"><span class="linenos" data-linenos=" 7 "></span></a>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8"></a><a href="#__codelineno-10-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9"></a><a href="#__codelineno-10-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"(1) {}"</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10"></a><a href="#__codelineno-10-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="p">{</span><span class="w"> </span><span class="mi">2u</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11"></a><a href="#__codelineno-10-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"(2) {}"</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12"></a><a href="#__codelineno-10-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13"></a><a href="#__codelineno-10-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="p">{</span><span class="w"> </span><span class="mf">2.5</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14"></a><a href="#__codelineno-10-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">"(3) {}"</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15"></a><a href="#__codelineno-10-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16"></a><a href="#__codelineno-10-16"><span class="linenos" data-linenos="16 "></span></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Running this program produces the output:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1"></a><a href="#__codelineno-11-1"><span class="linenos" data-linenos="1 "></span></a>(1) 1.5
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2"></a><a href="#__codelineno-11-2"><span class="linenos" data-linenos="2 "></span></a>(2) 2
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3"></a><a href="#__codelineno-11-3"><span class="linenos" data-linenos="3 "></span></a>(3) 2.5
+</span></code></pre></div>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>Change the assignments to 1, 2, and 3 (using integer literals with <code>int</code> instead of <code>auto</code>). Does this still satisfy the ODR?</p>
+</li>
+<li>
+<p>Add <code>println("(4) {}", a);</code> between the two closing curly braces, just before <code>main()</code> exits. Is the output what you expected?</p>
+</li>
+<li>
+<p>Change the output command <code>, a)</code> to <code>, ::a)</code> in each of the three times it appears in the program. What appears to happen? (Explanation: the global scope resolution operator <code>::</code> selects the global <code>a</code> over any other <code>a</code> that may be visible.)</p>
+</li>
+</ul>
+<h2 id="Static-and-thread-local-variables">Static and thread-local variables<a class="headerlink" href="#Static-and-thread-local-variables" title="Permanent link">¶</a></h2>
+<p>Any global variables defined in the program are visible throughout the whole of the program, which unfortunately means that name clashes are possible in different and unrelated portions of code. The traditional way of getting round this problem, inherited from C, was to use the <code>static</code> keyword. All this does in the context of a global variable definition is make the variable local to the <em>translation unit</em>, which is the proper name for the each C++ source file with all the headers it <code>#include</code>s (which compiles to a single <code>.obj</code> or <code>.o</code> object file). The term <em>file static</em> can also be used to describe the visibility of such a variable, referring to the <code>.cpp</code> file it is defined in. Thus two <code>.obj</code> or <code>.o</code> files each with one or more <code>static</code> variables of the same name can be linked to form an executable, without generating linker errors.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a><a href="#__codelineno-12-1"><span class="linenos" data-linenos="1 "></span></a>static int i = 1000; // only visible within this translation unit
+</span></code></pre></div>
+<p>The <code>thread_local</code> keyword (added in C++11) can optionally be used at global scope and specifies a variable with global visibility which is created (and optionally initialized) when a new thread is launched:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1"></a><a href="#__codelineno-13-1"><span class="linenos" data-linenos="1 "></span></a>thread_local size_t my_counter{ 0 }; // different variable initialized for each new thread
+</span></code></pre></div>
+<p>Further discussion of multi-threaded coding is beyond the scope of this Tutorial, but you should be aware that global <code>thread_local</code> variables may add semi-hidden <em>time-and-space</em> costs (lower run-time efficiency in CPU time and increased memory usage) to threaded programs because of the extra initialization that has to be performed whenever a new thread is launched.</p>
+<p>The keywords <code>static</code> and <code>thread_local</code> have uses in other contexts too, as we will discover later (<code>static</code> local and class variables and <code>thread_local</code> variables in functions). A variable can also be both file <code>static</code> and <code>thread_local</code>.</p>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>Create two different <code>.cpp</code> files with the above definition of <code>i</code>, except using different assigned values. Can they be compiled and linked together with a third file containing a <code>main()</code> function? Which, if any, value of <code>i</code> can <code>main()</code> reference?</p>
+</li>
+<li>
+<p>Remove the <code>static</code> keyword from both files defining global <code>i</code>. What error message do you get trying to link all three files together?</p>
+</li>
+<li>
+<p>Now add the <code>static</code> keyword back to just one of the <code>.cpp</code> files defining <code>i</code>. Does the program now compile, and if so which <code>i</code> is output?</p>
+</li>
+</ul>
+<h2 id="Namespaces">Namespaces<a class="headerlink" href="#Namespaces" title="Permanent link">¶</a></h2>
+<p>The purpose of namespaces is to solve the problem of global names clashing with each other. (We have already encountered the <code>std</code> namespace which contains all of the Standard Library components.) Namespaces can only be introduced at global scope and are delimited with the by now familiar <code>{</code> and <code>}</code>. Namespaces <strong>can</strong> exist inside other namespaces, with the scope resolution operator <code>::</code> also used to separate nested namespace names. Entities (such as variables, functions and classes) defined within namespaces are still globally visible, and can be either made available with <code>using</code> statements or directives, or referenced using their <em>fully qualified names</em>.</p>
+<p>The next program defines two global variables, each in different namespaces, which means they can exist in the same <code>.cpp</code> file. Notice that the namespace names have been written in sentence case with the variable names in snake case, both common conventions:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1"></a><a href="#__codelineno-14-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="c1">// 02-height.cpp : define the same variable name in two different namespaces</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2"></a><a href="#__codelineno-14-2"><span class="linenos" data-linenos=" 2 "></span></a>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3"></a><a href="#__codelineno-14-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;print&gt;</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4"></a><a href="#__codelineno-14-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5"></a><a href="#__codelineno-14-5"><span class="linenos" data-linenos=" 5 "></span></a>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6"></a><a href="#__codelineno-14-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="k">namespace</span><span class="w"> </span><span class="nn">Wonderland</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7"></a><a href="#__codelineno-14-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">alice_height_m</span><span class="p">{</span><span class="w"> </span><span class="mf">0.15</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8"></a><a href="#__codelineno-14-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="p">}</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9"></a><a href="#__codelineno-14-9"><span class="linenos" data-linenos=" 9 "></span></a>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10"></a><a href="#__codelineno-14-10"><span class="linenos" data-linenos="10 "></span></a><span class="k">namespace</span><span class="w"> </span><span class="nn">VictorianEngland</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11"></a><a href="#__codelineno-14-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">alice_height_m</span><span class="p">{</span><span class="w"> </span><span class="mf">0.9</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12"></a><a href="#__codelineno-14-12"><span class="linenos" data-linenos="12 "></span></a><span class="p">}</span>
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13"></a><a href="#__codelineno-14-13"><span class="linenos" data-linenos="13 "></span></a>
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14"></a><a href="#__codelineno-14-14"><span class="linenos" data-linenos="14 "></span></a><span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15"></a><a href="#__codelineno-14-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"Alice</span><span class="se">\'</span><span class="s">s height varies between {}m and {}m"</span><span class="p">,</span>
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16"></a><a href="#__codelineno-14-16"><span class="linenos" data-linenos="16 "></span></a><span class="w">        </span><span class="n">Wonderland</span><span class="o">::</span><span class="n">alice_height_m</span><span class="p">,</span>
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17"></a><a href="#__codelineno-14-17"><span class="linenos" data-linenos="17 "></span></a><span class="w">        </span><span class="n">VictorianEngland</span><span class="o">::</span><span class="n">alice_height_m</span><span class="p">);</span>
+</span><span id="__span-14-18"><a id="__codelineno-14-18" name="__codelineno-14-18"></a><a href="#__codelineno-14-18"><span class="linenos" data-linenos="18 "></span></a><span class="p">}</span>
+</span></code></pre></div>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>Add the statement <code>using namespace VictorianEngland;</code> as the first line of <code>main()</code>. Does this change the output in any way?</p>
+</li>
+<li>
+<p>Now remove <code>VictorianEngland::</code> from the output call. Does the output change now? What do you learn about the connection between <code>using</code> directives and unqualified names?</p>
+</li>
+</ul>
+<p>Namespaces are <em>open</em>, that is elements can be added to a namespace from different parts of a program, even from different <code>.cpp</code> files. (This means it is technically possible to add to the <code>std</code> namespace, but doing so is strongly discouraged as it can create misleading code that may mysteriously fail to compile on other systems or platforms.)</p>
+<p>Namespaces can be nested in two ways: by either using multiple <code>namespace</code> keywords, or using the scope resolution operator, as shown in the code fragments below:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1"></a><a href="#__codelineno-15-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">namespace</span><span class="w"> </span><span class="nn">Wonderland</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2"></a><a href="#__codelineno-15-2"><span class="linenos" data-linenos="2 "></span></a><span class="k">namespace</span><span class="w"> </span><span class="nn">Animals</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3"></a><a href="#__codelineno-15-3"><span class="linenos" data-linenos="3 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">white_rabbit</span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4"></a><a href="#__codelineno-15-4"><span class="linenos" data-linenos="4 "></span></a><span class="p">}</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5"></a><a href="#__codelineno-15-5"><span class="linenos" data-linenos="5 "></span></a><span class="p">}</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6"></a><a href="#__codelineno-15-6"><span class="linenos" data-linenos="6 "></span></a>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7"></a><a href="#__codelineno-15-7"><span class="linenos" data-linenos="7 "></span></a><span class="k">namespace</span><span class="w"> </span><span class="nn">Wonderland</span><span class="o">::</span><span class="nn">Animals</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8"></a><a href="#__codelineno-15-8"><span class="linenos" data-linenos="8 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">mouse</span><span class="p">{</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9"></a><a href="#__codelineno-15-9"><span class="linenos" data-linenos="9 "></span></a><span class="p">}</span>
+</span></code></pre></div>
+<p>The fully qualified names of both variables defined are very similar, they are: <code>Wonderland::Animals::white_rabbit</code> and <code>Wonderland::Animals::mouse</code>. Notice that the definitions within the <code>namespace</code> keywords have <strong>not</strong> been indented; this is common practice because of the nature of the code (functions and class definitions) that can often appear within namespaces, which reads better unindented.</p>
+<p>Another feature of namespaces is the curiously named <em>unnamed namespace</em>. The syntax is simple, a <code>namespace</code> keyword followed immediately by <code>{</code>. The purpose of the unnamed namespace is to replace the use of <code>static</code> in definition of global names visible to just the current translation unit. The following code fragment defines and assigns a variable whose fully qualified name in the same translation unit is just <code>i</code>, and is not visible in any other.</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1"></a><a href="#__codelineno-16-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">namespace</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2"></a><a href="#__codelineno-16-2"><span class="linenos" data-linenos="2 "></span></a><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3000</span><span class="p">;</span><span class="w">    </span><span class="c1">// variable i is only visible later within this file</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3"></a><a href="#__codelineno-16-3"><span class="linenos" data-linenos="3 "></span></a><span class="p">}</span>
+</span></code></pre></div>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>Create a program that uses the above fragment to output the value of <code>i</code> from within <code>main()</code></p>
+</li>
+<li>
+<p>Now move <code>main()</code> to a separate file. Does the program still compile? What if there were more than one translation unit containing an unnamed namespace?</p>
+</li>
+</ul>
+<h2 id="Constants-and-references">Constants and references<a class="headerlink" href="#Constants-and-references" title="Permanent link">¶</a></h2>
+<p>Constants are named entities that have only one value during their lifetime, in other words their initial value remains unchanged. (I avoid the use of the word "variable" here, or worse still "<code>const</code> variable", to avoid confusion, but most of the rules of variables apply to constants too.) Constants are useful in many places in Modern C++ programs, and in some places they can be used where variables cannot, such as when specifying array sizes and template parameters. Similarly to <code>auto</code> variable definitions, constants <strong>must</strong> have their value specified when they are defined.</p>
+<p>Constants are defined using the <code>const</code> keyword, <strong>either</strong> before or after the mandatory type specifier (or <code>auto</code>), as shown in the program below which defines a global constant and a local constant:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1"></a><a href="#__codelineno-17-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="c1">// 02-constants.cpp : introducing the const keyword</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2"></a><a href="#__codelineno-17-2"><span class="linenos" data-linenos=" 2 "></span></a>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3"></a><a href="#__codelineno-17-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;print&gt;</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4"></a><a href="#__codelineno-17-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5"></a><a href="#__codelineno-17-5"><span class="linenos" data-linenos=" 5 "></span></a>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6"></a><a href="#__codelineno-17-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">PI</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.14159265358979</span><span class="p">;</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7"></a><a href="#__codelineno-17-7"><span class="linenos" data-linenos=" 7 "></span></a>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8"></a><a href="#__codelineno-17-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9"></a><a href="#__codelineno-17-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">APPROX_E</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10"></a><a href="#__codelineno-17-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"pi is almost exactly {}, while e is approximately {}"</span><span class="p">,</span>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11"></a><a href="#__codelineno-17-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">        </span><span class="n">PI</span><span class="p">,</span><span class="w"> </span><span class="n">APPROX_E</span><span class="p">);</span>
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12"></a><a href="#__codelineno-17-12"><span class="linenos" data-linenos="12 "></span></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Notice that the named constants have been specified using upper case, which is a common convention.</p>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>Try to re-assign to <code>PI</code> within <code>main()</code>. What error do you get?</p>
+</li>
+<li>
+<p>Try to output the result of adding the two constants together. Is this what you would expect for two variables of different types (implied in the case of <code>APPROX_E</code>)?</p>
+</li>
+</ul>
+<p>Constants can be assigned to a variable, and created from a variable at the point it is defined. Interestingly this implies that the value of a C++ constant <em>is not necessarily known</em> at compile-time; not all constants therefore can be used as array sizes, for example. (If a constant compile-time value is needed for this purpose, your compiler will refuse to compile such code.) Variables of many types can usefully be declared <code>const</code> where their value shouldn't be changed, or where changing them would make no sense. This stricter use of <code>const</code> is known as <em>const-correctness</em> and is an additional form of type safety which can often be very useful (of course, most uses of <code>const</code> are optional, as in the above program, but its consistent and correct use is strongly encouraged).</p>
+<p>References are hugely important to C++ and the necessity of fully understanding them in order to become proficient in the language cannot be overstated. There are two types of references, the style that date back to the earliest versions of C++, now known as <em>l-value references</em>, and those introduced with C++11, known as <em>r-value references</em> (or sometimes as <em>forwarding</em> or even <em>universal</em> references). Only l-value references are discussed here.</p>
+<p>A reference is an <em>alias</em> (an alternative name) for another variable <strong>which must already exist</strong>. It is (intentionally) difficult to make a reference outlive the variable it is <em>bound</em> to, managing to do so creates a <em>dangling</em> reference, which is undefined behavior. The primary use of references is to make variables visible from enclosed scopes to outer scopes from which they would not otherwise be accessible, as we shall discover later in the discussion of functions. Changing a reference changes the value of the variable to which it is bound, as shown in the program below:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1"></a><a href="#__codelineno-18-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="c1">// 02-references.cpp : introducing l-value references</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2"></a><a href="#__codelineno-18-2"><span class="linenos" data-linenos=" 2 "></span></a>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3"></a><a href="#__codelineno-18-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;print&gt;</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4"></a><a href="#__codelineno-18-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5"></a><a href="#__codelineno-18-5"><span class="linenos" data-linenos=" 5 "></span></a>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6"></a><a href="#__codelineno-18-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="kt">int</span><span class="w"> </span><span class="n">alice_age</span><span class="p">{</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7"></a><a href="#__codelineno-18-7"><span class="linenos" data-linenos=" 7 "></span></a>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8"></a><a href="#__codelineno-18-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9"></a><a href="#__codelineno-18-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"Alice</span><span class="se">\'</span><span class="s">s age is {}"</span><span class="p">,</span><span class="w"> </span><span class="n">alice_age</span><span class="p">);</span>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10"></a><a href="#__codelineno-18-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">alice_age_ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alice_age</span><span class="p">;</span>
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11"></a><a href="#__codelineno-18-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="n">alice_age_ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12"></a><a href="#__codelineno-18-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"Alice</span><span class="se">\'</span><span class="s">s age is now {}"</span><span class="p">,</span><span class="w"> </span><span class="n">alice_age</span><span class="p">);</span>
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13"></a><a href="#__codelineno-18-13"><span class="linenos" data-linenos="13 "></span></a><span class="p">}</span>
+</span></code></pre></div>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>Change both instances of <code>int</code> to <code>auto</code>. Does the code still compile?</p>
+</li>
+<li>
+<p>Make the global <code>alice_age</code> constant. Does the code compile now?</p>
+</li>
+<li>
+<p>Now make <code>alice_age_ref</code> constant instead. Does the code compile?</p>
+</li>
+<li>
+<p>Now remove the <code>&amp;</code> on the second line of <code>main()</code>. Does this allow the code to compile? What is the output from running this modified program?</p>
+</li>
+</ul>
+<p>As shown above, the syntax for creating and initializing a reference is simple, a single ampersand between the type specifier and the variable name. This difference is subtle compared to a conventional definition, so you will need to be on the lookout for it whenever reading code.</p>
+<p>The property of "reference-ness" and "const-ness" is stripped away from variables that are being assigned from. It is possible to initialize a constant from another constant when using <code>auto</code>, but this needs to be explicitly specified as a property of the entity being initialized:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1"></a><a href="#__codelineno-19-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="p">{</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">};</span><span class="w">  </span><span class="c1">// define a as constant</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2"></a><a href="#__codelineno-19-2"><span class="linenos" data-linenos="2 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w">          </span><span class="c1">// define b as variable copy of a</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3"></a><a href="#__codelineno-19-3"><span class="linenos" data-linenos="3 "></span></a><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w">    </span><span class="c1">// define c as constant copy of a</span>
+</span></code></pre></div>
+<p>It is also possible to explicitly (re-)specify the reference property on the assignee side, but attempting to change the value of a constant value through a non-<code>const</code> reference is not allowed:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1"></a><a href="#__codelineno-20-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">d</span><span class="p">{</span><span class="w"> </span><span class="mi">11</span><span class="w"> </span><span class="p">};</span><span class="w">  </span><span class="c1">// define d as constant</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2"></a><a href="#__codelineno-20-2"><span class="linenos" data-linenos="2 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">e</span><span class="p">{</span><span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="p">};</span><span class="w">        </span><span class="c1">// define e as variable</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3"></a><a href="#__codelineno-20-3"><span class="linenos" data-linenos="3 "></span></a><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">{</span><span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// define f as constant reference (to a literal constant value)</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4"></a><a href="#__codelineno-20-4"><span class="linenos" data-linenos="4 "></span></a><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">;</span><span class="w">   </span><span class="c1">// define g as constant reference to d</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5"></a><a href="#__codelineno-20-5"><span class="linenos" data-linenos="5 "></span></a><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">;</span><span class="w">         </span><span class="c1">// define h as reference to e</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6"></a><a href="#__codelineno-20-6"><span class="linenos" data-linenos="6 "></span></a><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">;</span><span class="w">   </span><span class="c1">// define i as constant reference to e</span>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7"></a><a href="#__codelineno-20-7"><span class="linenos" data-linenos="7 "></span></a><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">;</span><span class="w">         </span><span class="c1">// define j as reference to d</span>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8"></a><a href="#__codelineno-20-8"><span class="linenos" data-linenos="8 "></span></a><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">;</span><span class="w">         </span><span class="c1">// define k as reference to f</span>
+</span></code></pre></div>
+<p>Of the above, only <code>b</code>, <code>e</code> and <code>h</code> are re-assignable.</p>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>Try the above definitions and assignment within a <code>main()</code> function. Can you get them all to output what you expect?</p>
+</li>
+<li>
+<p>Try assigning a new value to each of these eleven variables. What error messages do you expect?</p>
+</li>
+</ul>
+<h2 id="Constexpr-variables">Constexpr variables<a class="headerlink" href="#Constexpr-variables" title="Permanent link">¶</a></h2>
+<p>Another way of qualifying a definition is with the <code>constexpr</code> keyword. This is a stronger form of <code>const</code> which explicity causes evaluation of the initial (and only) value of the variable <strong>at compile-time</strong>. This keyword has uses in <em>metaprogramming</em>, which is essentially causing code to be generated and run at compile-time. Note that use of floating-point values <strong>is</strong> permitted; this is not the case in traditional C++ Template Metaprogramming (TMP) which has been around since C++98.</p>
+<p>In fact, <code>constexpr</code> expressions can be complex with recent compilers, as long as all parts of the expression are themselves <code>constexpr</code>. The following program defines two constants, one of which is <code>constexpr</code>. Only the <code>constexpr</code> entity can be tested against <code>static_assert()</code>, which is a boolean truth test checked at compile-time. Don't worry if the inequality syntax is unfamiliar as this is covered in the next Chapter; the test <code>PI &gt; 3.141 &amp;&amp; PI &lt; 3.143</code> evaluates the mathematical inequality <code>3.141 &lt; PI &lt; 3.143</code> in a way that is valid C++:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1"></a><a href="#__codelineno-21-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="c1">// 02-constexpr.cpp : introducing the constexpr keyword</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2"></a><a href="#__codelineno-21-2"><span class="linenos" data-linenos=" 2 "></span></a>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3"></a><a href="#__codelineno-21-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;print&gt;</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4"></a><a href="#__codelineno-21-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5"></a><a href="#__codelineno-21-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6"></a><a href="#__codelineno-21-6"><span class="linenos" data-linenos=" 6 "></span></a>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7"></a><a href="#__codelineno-21-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="c1">// Note: currently, not all compilers mark `acos` as a</span>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8"></a><a href="#__codelineno-21-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="c1">// constexpr function in cmath. The following line might</span>
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9"></a><a href="#__codelineno-21-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="c1">// not compile with `clang++` for example.</span>
+</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10"></a><a href="#__codelineno-21-10"><span class="linenos" data-linenos="10 "></span></a><span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">PI1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">acos</span><span class="p">(</span><span class="mf">-1.0</span><span class="p">);</span>
+</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11"></a><a href="#__codelineno-21-11"><span class="linenos" data-linenos="11 "></span></a><span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">PI2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">22.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">7.0</span><span class="p">;</span>
+</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12"></a><a href="#__codelineno-21-12"><span class="linenos" data-linenos="12 "></span></a>
+</span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13"></a><a href="#__codelineno-21-13"><span class="linenos" data-linenos="13 "></span></a><span class="k">static_assert</span><span class="p">(</span><span class="n">PI1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">3.141</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">PI1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">3.143</span><span class="p">);</span>
+</span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14"></a><a href="#__codelineno-21-14"><span class="linenos" data-linenos="14 "></span></a><span class="k">static_assert</span><span class="p">(</span><span class="n">PI2</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">3.141</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">PI2</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">3.143</span><span class="p">);</span>
+</span><span id="__span-21-15"><a id="__codelineno-21-15" name="__codelineno-21-15"></a><a href="#__codelineno-21-15"><span class="linenos" data-linenos="15 "></span></a>
+</span><span id="__span-21-16"><a id="__codelineno-21-16" name="__codelineno-21-16"></a><a href="#__codelineno-21-16"><span class="linenos" data-linenos="16 "></span></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-17"><a id="__codelineno-21-17" name="__codelineno-21-17"></a><a href="#__codelineno-21-17"><span class="linenos" data-linenos="17 "></span></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"PI1 = {}"</span><span class="p">,</span><span class="w"> </span><span class="n">PI1</span><span class="p">);</span>
+</span><span id="__span-21-18"><a id="__codelineno-21-18" name="__codelineno-21-18"></a><a href="#__codelineno-21-18"><span class="linenos" data-linenos="18 "></span></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"PI2 = {}"</span><span class="p">,</span><span class="w"> </span><span class="n">PI2</span><span class="p">);</span>
+</span><span id="__span-21-19"><a id="__codelineno-21-19" name="__codelineno-21-19"></a><a href="#__codelineno-21-19"><span class="linenos" data-linenos="19 "></span></a><span class="p">}</span>
+</span></code></pre></div>
+<p>(Hint: this program is the first to require an additional header to <code>&lt;print&gt;</code>; you may need to add <code>-lm</code> to the compile command under Linux in order to link in the math library containing the <code>acos()</code> function.)</p>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>Try to make the second <code>static_assert()</code> fail by using an invalid inequality test.</p>
+</li>
+<li>
+<p>Now change the program to check the value of <em>e</em> at compile time. (Hint: use the expression <code>exp(1.0)</code> to get a good approximation of <em>e</em>.)</p>
+</li>
+</ul>
+<p>As can be seen from attempting to compile this program, <code>static_assert()</code> is a useful tool to have, and adds no run-time overhead cost. The <code>static_assert()</code> test can optionally take a second string literal parameter, this being the error message for the compiler to output if the assertion fails.</p>
+<p><em>All text and program code ©2019-2025 Richard Spencer, all rights reserved.</em></p>
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+          <div class="md-top" data-md-component="top" hidden="">
+  <div class="md-top__center">
+    <button type="button" class="md-top__button md-top__button--main" data-md-action="top">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+      <span>回到页面顶部</span>
+    </button>
+    
+      
+      
+      <label class="md-top__button md-top__side md-top__side--nav" for="__drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 14H9V6h11Z"></path></svg>
+      </label>
+    
+    
+      
+      
+      <label class="md-top__button md-top__side md-top__side--toc" for="__toc">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m-5 14H4V6h11Z"></path></svg>
+      </label>
+    
+  </div>
+</div>
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2025 | 🚀 Aaron Wang
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/jaywhj" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="mailto:junewhj@qq.com" target="_blank" rel="noopener" title="Email" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20 8-8 5-8-5V6l8 5 8-5m0-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"></path></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.top", "navigation.footer", "content.code.copy", "content.tooltips", "content.footnote.tooltips", "search.highlight", "toc.follow"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e3ad5d0a.min.js"></script>
+      
+        <script src="../assets/document_dates/core/timeago.full.min.js"></script>
+      
+        <script src="../javascripts/translate.min.js"></script>
+      
+        <script src="../javascripts/extra.js"></script>
+      
+        <script src="../site-plugin/katex/katex.js"></script>
+      
+        <script src="../site-plugin/katex/katex.min.js"></script>
+      
+        <script src="../site-plugin/katex/auto-render.min.js"></script>
+      
+        <script src="../site-plugin/katex/mhchem.min.js"></script>
+      
+        <script src="../assets/document_dates/tippy/popper.min.js"></script>
+      
+        <script src="../assets/document_dates/tippy/tippy.umd.min.js"></script>
+      
+        <script src="../assets/document_dates/core/md5.min.js"></script>
+      
+        <script src="../assets/document_dates/core/default.config.js"></script>
+      
+        <script src="../assets/document_dates/user.config.js"></script>
+      
+        <script src="../assets/document_dates/core/utils.js"></script>
+      
+        <script src="../assets/document_dates/core/core.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</script></body></html>

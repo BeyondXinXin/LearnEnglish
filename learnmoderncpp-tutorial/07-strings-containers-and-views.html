@@ -1,0 +1,1790 @@
+<!DOCTYPE html><html lang="zh" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="mkdocs教程，markdown教程，markdown生成PPT、静态网站、图表、思维导图，markdown编写AI结构化提示词">
+      
+      
+        <meta name="author" content="Aaron Wang">
+      
+      
+        <link rel="canonical" href="https://hongjun.vip/learnmoderncpp-tutorial/07-strings-containers-and-views.html">
+      
+      
+      
+      
+        
+          <link rel="alternate" href=".." hreflang="zh">
+        
+          <link rel="alternate" href=".." hreflang="en">
+        
+          <link rel="alternate" href=".." hreflang="de">
+        
+          <link rel="alternate" href=".." hreflang="ru">
+        
+          <link rel="alternate" href=".." hreflang="ja">
+        
+          <link rel="alternate" href=".." hreflang="nl">
+        
+          <link rel="alternate" href=".." hreflang="fr">
+        
+          <link rel="alternate" href=".." hreflang="es">
+        
+          <link rel="alternate" href=".." hreflang="pt">
+        
+          <link rel="alternate" href=".." hreflang="ar">
+        
+          <link rel="alternate" href=".." hreflang="ko">
+        
+      
+      
+      
+        
+        
+        
+          <link rel="icon" href="../assets/images/favicon.png">
+        
+      
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-materialx-10.1.3">
+    
+    
+      
+        <title>Strings, Containers and Views - 文档即产品</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.4dadc26f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.204eaadb.min.css">
+      
+    
+    
+
+    
+
+    
+      
+        <script src="https://unpkg.com/iframe-worker/shim"></script>
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../site-plugin/katex/katex.min.css">
+    
+      <link rel="stylesheet" href="../assets/document_dates/fonts/material-icons.css">
+    
+      <link rel="stylesheet" href="../assets/document_dates/tippy/material.css">
+    
+      <link rel="stylesheet" href="../assets/document_dates/tippy/shift-away.css">
+    
+      <link rel="stylesheet" href="../assets/document_dates/tippy/tippy.css">
+    
+      <link rel="stylesheet" href="../assets/document_dates/tippy/scale.css">
+    
+      <link rel="stylesheet" href="../assets/document_dates/tippy/light.css">
+    
+      <link rel="stylesheet" href="../assets/document_dates/tippy/backdrop.css">
+    
+      <link rel="stylesheet" href="../assets/document_dates/core/core.css">
+    
+      <link rel="stylesheet" href="../assets/document_dates/user.config.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+        </style></head>
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" data-mx-topbar="glass">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="toc" type="checkbox" id="__toc" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <label class="md-overlay" for="__toc"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#Strings-Containers-and-Views" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../index.html" title="文档即产品" class="md-header__button md-logo" aria-label="文档即产品" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.03 2.59a1.5 1.5 0 0 1 1.94 0l7.5 6.363a1.5 1.5 0 0 1 .53 1.144V19.5a1.5 1.5 0 0 1-1.5 1.5h-5.75a.75.75 0 0 1-.75-.75V14h-2v6.25a.75.75 0 0 1-.75.75H4.5A1.5 1.5 0 0 1 3 19.5v-9.403c0-.44.194-.859.53-1.144ZM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v6.25h5v-9.403Z"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            文档即产品
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Strings, Containers and Views
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="自动模式 - 随系统主题色" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="自动模式 - 随系统主题色" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue" aria-label="亮色模式" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="亮色模式" for="__palette_2" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="cyan" data-md-color-accent="cyan" aria-label="暗色模式" type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="暗色模式" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="选择当前语言">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"></path></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="zh" class="md-select__link">
+              🇨🇳 中文
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="en" class="md-select__link">
+              🇺🇸 English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="de" class="md-select__link">
+              🇩🇪 Deutsch
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="ru" class="md-select__link">
+              🇷🇺 Русский
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="ja" class="md-select__link">
+              🇯🇵 日本語
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="nl" class="md-select__link">
+              🇳🇱 Dutch
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="fr" class="md-select__link">
+              🇫🇷 Français
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="es" class="md-select__link">
+              🇪🇸 Español
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="pt" class="md-select__link">
+              🇧🇷 Português
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="ar" class="md-select__link">
+              🇸🇦 العربية
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="ko" class="md-select__link">
+              🇰🇷 한국어
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.25 2a8.25 8.25 0 0 1 6.34 13.53l5.69 5.69a.749.749 0 0 1-.326 1.275.75.75 0 0 1-.734-.215l-5.69-5.69A8.25 8.25 0 1 1 10.25 2M3.5 10.25a6.75 6.75 0 1 0 13.5 0 6.75 6.75 0 0 0-13.5 0"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.25 2a8.25 8.25 0 0 1 6.34 13.53l5.69 5.69a.749.749 0 0 1-.326 1.275.75.75 0 0 1-.734-.215l-5.69-5.69A8.25 8.25 0 1 1 10.25 2M3.5 10.25a6.75 6.75 0 1 0 13.5 0 6.75 6.75 0 0 0-13.5 0"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jaywhj" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    aaron - repo
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../materialx-for-mkdocs.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  下一代主题插件 MaterialX
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../markdown.md" class="md-tabs__link">
+          
+  
+  
+  Markdown 系列
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../recently-updated-zh.md" class="md-tabs__link">
+          
+  
+  
+  效率提升
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../RECENTLY_UPDATED.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  最近更新
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="文档即产品" class="md-nav__button md-logo" aria-label="文档即产品" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.03 2.59a1.5 1.5 0 0 1 1.94 0l7.5 6.363a1.5 1.5 0 0 1 .53 1.144V19.5a1.5 1.5 0 0 1-1.5 1.5h-5.75a.75.75 0 0 1-.75-.75V14h-2v6.25a.75.75 0 0 1-.75.75H4.5A1.5 1.5 0 0 1 3 19.5v-9.403c0-.44.194-.859.53-1.144ZM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v6.25h5v-9.403Z"></path></svg>
+
+    </a>
+    文档即产品
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jaywhj" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    aaron - repo
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../materialx-for-mkdocs.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    下一代主题插件 MaterialX
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Markdown 系列
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Markdown 系列
+  
+
+          </label>
+          <ul class="md-nav__list">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../markdown.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Markdown 实用语法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../document-dates-zh.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日期作者头像插件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    效率提升
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    效率提升
+  
+
+          </label>
+          <ul class="md-nav__list">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recently-updated-zh.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    最近更新列表插件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hainan.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    海南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RECENTLY_UPDATED.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    最近更新
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc">
+      
+        <li class="md-nav__item">
+  <a href="#String-initialization-concatenation-and-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        String initialization, concatenation and comparison
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Subscripting-and-string-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subscripting and string methods
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Conversions-and-literals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conversions and literals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#String-views" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        String views
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Vectors-and-iterators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vectors and iterators
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Spans-and-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spans and arrays
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Ordered-and-unordered-sets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ordered and unordered sets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Lists-and-forward-lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lists and forward-lists
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Ordered-and-unordered-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ordered and unordered maps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Other-containers-and-adaptors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other containers and adaptors
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+  
+
+
+<h1 id="Strings-Containers-and-Views">Strings, Containers and Views<a class="headerlink" href="#Strings-Containers-and-Views" title="Permanent link">¶</a></h1>
+<div class="document-dates-plugin-wrapper document-dates-top"><div class="document-dates-plugin" locale=""><div class="dd-left"><span class="dd-item" data-tippy-content="" data-tippy-raw="2026-04-17"><span class="material-icons" data-icon="doc_created"></span><time datetime="2026-04-17T14:15:10+08:00"></time></span><span class="dd-item" data-tippy-content="" data-tippy-raw="2026-04-17"><span class="material-icons" data-icon="doc_updated"></span><time datetime="2026-04-17T06:15:10+00:00"></time></span></div><div class="dd-right"><span class="material-icons" data-icon="doc_author"></span><div class="author-group"><div class="avatar-wrapper" data-name="yaoxin" data-tippy-content="" data-tippy-raw="&lt;a href=&quot;mailto:yaoxin@rossumrobot.cn&quot;&gt;yaoxin&lt;/a&gt;"><span class="avatar-text"></span><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="" data-desc-position="bottom"><img class="avatar" data-src="" data-email="yaoxin@rossumrobot.cn"></a></div></div></div></div></div>
+
+<h2 id="String-initialization-concatenation-and-comparison">String initialization, concatenation and comparison<a class="headerlink" href="#String-initialization-concatenation-and-comparison" title="Permanent link">¶</a></h2>
+<p>Whilst support for read-only string literals is built into C++, we must make use of the Standard Library when we want a string-type which is be able to be manipulated and compared, using operators such as <code>+</code> (concatenation) and <code>==</code> (equality comparison). The <code>std::string</code> type supports all of the operations you would expect to be present, such as concatenation, indexing, sub-string extraction, comparisons and reporting the length. It is also possible to directly access the raw string data, if desired, or pass a <code>std::string</code> to a (C-style) function expecting a <code>const char*</code>. All of the memory management operations necessary are taken care of automatically at run-time; string objects are allowed to use heap memory and interestingly do not use any "special" features of the language not available to the application programmer. (Writing your own string class is a commonly advised exercise in gaining proficiency in C++.)</p>
+<p>An empty string object can be created using <code>string</code> as the type specifier, either using uniform initialization syntax, or <code>auto</code>, or omitting the braces altogether where the type specifier is first:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><a href="#__codelineno-0-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">string</span><span class="w"> </span><span class="n">s1</span><span class="p">;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><a href="#__codelineno-0-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">string</span><span class="w"> </span><span class="n">s2</span><span class="p">{};</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a><a href="#__codelineno-0-3"><span class="linenos" data-linenos="3 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">s3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">string</span><span class="p">{};</span><span class="w"> </span><span class="c1">// s1, s2, s3 are empty (mutable) strings</span>
+</span></code></pre></div>
+<p>Other variants exist, but these shown are the most modern. When an empty <code>std::string</code> is compared against an empty string literal <code>""</code> using <code>==</code> the result is <code>true</code>.</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><a href="#__codelineno-1-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">is_empty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">s1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">""</span><span class="p">);</span><span class="w"> </span><span class="c1">// is_empty has value "true", also for s2 and s3</span>
+</span></code></pre></div>
+<p>A <code>std::string</code> can be initialized or re-assigned from a string literal:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><a href="#__codelineno-2-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">string</span><span class="w"> </span><span class="n">name1</span><span class="p">;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a><a href="#__codelineno-2-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">name1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Bilbo"</span><span class="p">;</span><span class="w">             </span><span class="c1">// (re-)assignment after definition</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a><a href="#__codelineno-2-3"><span class="linenos" data-linenos="3 "></span></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a><a href="#__codelineno-2-4"><span class="linenos" data-linenos="4 "></span></a><span class="n">string</span><span class="w"> </span><span class="n">name2</span><span class="p">{</span><span class="w"> </span><span class="s">"Frodo"</span><span class="w"> </span><span class="p">};</span><span class="w">     </span><span class="c1">// assignment combined with definition</span>
+</span></code></pre></div>
+<p>Both <code>name1</code> and <code>name2</code> are able to be modified, for example by concatenation using <code>+</code>:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><a href="#__codelineno-3-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">name1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" Baggins"</span><span class="p">;</span><span class="w">  </span><span class="c1">// name1 has value "Bilbo Baggins"</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a><a href="#__codelineno-3-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">name2</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">" Baggins"</span><span class="p">;</span><span class="w">         </span><span class="c1">// name2 has value "Frodo Baggins"</span>
+</span></code></pre></div>
+<p>Single <code>char</code> literals can be appended too, although a <code>std::string</code> <strong>cannot</strong> be created from a single <code>char</code>:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a><a href="#__codelineno-4-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">string</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">'A'</span><span class="p">;</span><span class="w">             </span><span class="c1">// Error! Does not compile</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2"></a><a href="#__codelineno-4-2"><span class="linenos" data-linenos="2 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">string</span><span class="p">{}</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="sc">'A'</span><span class="p">;</span><span class="w">    </span><span class="c1">// This version is fine, but maybe non-obvious</span>
+</span></code></pre></div>
+<p>Strings can be reset to empty using a member function, or by assigning to an empty string literal:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a><a href="#__codelineno-5-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">""</span><span class="p">;</span><span class="w">                     </span><span class="c1">// Both of these accomplish the same thing</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a><a href="#__codelineno-5-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">s2</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span><span class="w">                  </span><span class="c1">// (Using clear() is the preferred method)</span>
+</span></code></pre></div>
+<p>Confusingly, there are two different member functions which return a <code>std::string</code>'s length (excluding the <code>\0</code> terminator if it was constructed from a string literal), and a third which returns a <code>bool</code> (value <code>true</code> indicates length is zero):</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a><a href="#__codelineno-6-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">name1</span><span class="p">.</span><span class="n">length</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">name2</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// historically std::string did not have size()</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2"></a><a href="#__codelineno-6-2"><span class="linenos" data-linenos="2 "></span></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Equal length</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3"></a><a href="#__codelineno-6-3"><span class="linenos" data-linenos="3 "></span></a><span class="p">}</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4"></a><a href="#__codelineno-6-4"><span class="linenos" data-linenos="4 "></span></a>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5"></a><a href="#__codelineno-6-5"><span class="linenos" data-linenos="5 "></span></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s2</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// use in preference to "s2.size() == 0"</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6"></a><a href="#__codelineno-6-6"><span class="linenos" data-linenos="6 "></span></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Empty string</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7"></a><a href="#__codelineno-6-7"><span class="linenos" data-linenos="7 "></span></a><span class="p">}</span>
+</span></code></pre></div>
+<p>The member functions <code>size()</code> and <code>empty()</code> are present in other containers as well, so it's a good idea to get to know them.</p>
+<h2 id="Subscripting-and-string-methods">Subscripting and string methods<a class="headerlink" href="#Subscripting-and-string-methods" title="Permanent link">¶</a></h2>
+<p>It is possible to iterate over a <code>std::string</code> using a range-for loop; the following program demonstrates this:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a><a href="#__codelineno-7-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="c1">// 07-string-upper.cpp : function to make a std::string uppercase in-place</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2"></a><a href="#__codelineno-7-2"><span class="linenos" data-linenos=" 2 "></span></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3"></a><a href="#__codelineno-7-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4"></a><a href="#__codelineno-7-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5"></a><a href="#__codelineno-7-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cctype&gt;</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6"></a><a href="#__codelineno-7-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7"></a><a href="#__codelineno-7-7"><span class="linenos" data-linenos=" 7 "></span></a>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8"></a><a href="#__codelineno-7-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="kt">void</span><span class="w"> </span><span class="nf">string_to_uppercase</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9"></a><a href="#__codelineno-7-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10"></a><a href="#__codelineno-7-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">toupper</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11"></a><a href="#__codelineno-7-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12"></a><a href="#__codelineno-7-12"><span class="linenos" data-linenos="12 "></span></a><span class="p">}</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13"></a><a href="#__codelineno-7-13"><span class="linenos" data-linenos="13 "></span></a>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14"></a><a href="#__codelineno-7-14"><span class="linenos" data-linenos="14 "></span></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15"></a><a href="#__codelineno-7-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Please enter some text in lower, mixed or uppercase:</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16"></a><a href="#__codelineno-7-16"><span class="linenos" data-linenos="16 "></span></a><span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">input</span><span class="p">;</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17"></a><a href="#__codelineno-7-17"><span class="linenos" data-linenos="17 "></span></a><span class="w">    </span><span class="n">getline</span><span class="p">(</span><span class="n">cin</span><span class="p">,</span><span class="w"> </span><span class="n">input</span><span class="p">);</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18"></a><a href="#__codelineno-7-18"><span class="linenos" data-linenos="18 "></span></a><span class="w">    </span><span class="n">string_to_uppercase</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19"></a><a href="#__codelineno-7-19"><span class="linenos" data-linenos="19 "></span></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"The same text in uppercase is:</span><span class="se">\n</span><span class="s">"</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20"></a><a href="#__codelineno-7-20"><span class="linenos" data-linenos="20 "></span></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Things to note about this program:</p>
+<ul>
+<li>
+<p>Both variables <code>s</code> and <code>c</code> are declared as references, thus modifiying them changes the variable they refer to, not a copy.</p>
+</li>
+<li>
+<p>The type of <code>c</code> is deduced by the compiler as, <code>char&amp;</code>.</p>
+</li>
+<li>
+<p>The <code>getline()</code> function (explained further in Chapter 8) is used to get an arbitrarily long line of input from <code>cin</code> and store it in <code>input</code>. (Note: don't confuse this with <code>cin.getline()</code> which we met in Chapter 5.)</p>
+</li>
+</ul>
+<p><strong>Experiment:</strong></p>
+<ul>
+<li>
+<p>Remove one of the <code>&amp;</code>s in the function <code>string_to_uppercase()</code>. Does the program still compile? Does it produce the expected output when run? Now remove the other <code>&amp;</code> instead and try the same thing. What does this tell you about the importance of reading code which uses reference semantics, very carefully?</p>
+</li>
+<li>
+<p>Modify <code>string_to_uppercase()</code> so that the uppercase string is <em>appended</em> to the input. Hint: this is a simple change that just requires some thought.</p>
+</li>
+<li>
+<p>Modify <code>string_to_uppercase()</code> so that a new uppercase string is returned as a <code>std::string</code>. Is the construct <code>input = string_to_uppercase(input);</code> within <code>main()</code> now legal? Does it work as expected? Do you still need to use reference semantics?</p>
+</li>
+</ul>
+<p>Individual characters of a <code>std::string</code> can be selected for read- or write-access using the subscript operator <code>[]</code>, which works in the same way as on built-in arrays. The index value is <strong>not</strong> checked for being within valid range (which is between <code>0</code> and <code>length() - 1</code> inclusive); if this check is required the member function <code>at()</code> should be used:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a><a href="#__codelineno-8-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">string</span><span class="w"> </span><span class="n">book</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"a hobbit"</span><span class="p">;</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2"></a><a href="#__codelineno-8-2"><span class="linenos" data-linenos="2 "></span></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3"></a><a href="#__codelineno-8-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">book</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">'A'</span><span class="p">;</span><span class="w">           </span><span class="c1">// book is now "A hobbit"</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4"></a><a href="#__codelineno-8-4"><span class="linenos" data-linenos="4 "></span></a>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5"></a><a href="#__codelineno-8-5"><span class="linenos" data-linenos="5 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">book</span><span class="p">[</span><span class="mi">99</span><span class="p">];</span><span class="w">      </span><span class="c1">// undefined behavior, probably garbage assigned to c1</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6"></a><a href="#__codelineno-8-6"><span class="linenos" data-linenos="6 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">c2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">book</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="mi">99</span><span class="p">);</span><span class="w">   </span><span class="c1">// throws an exception, possibly terminating the program (no value is assigned to c2)</span>
+</span></code></pre></div>
+<p><strong>Experiment:</strong></p>
+<ul>
+<li>
+<p>Modify <code>string_to_uppercase()</code> to use a regular for-loop and an index variable, together with unchecked array access syntax.</p>
+</li>
+<li>
+<p>Now modify this program to use <strong>checked</strong> array access. What happens if you make a (deliberate) bounds-checking error?</p>
+</li>
+</ul>
+<p>The member functions <code>front()</code> and <code>back()</code> return (writeable) references to the first and last characters of a string, resepctively; they can be used instead of <code>s[0]</code> and <code>s[s.length() - 1]</code>. Interestingly, <strong>reading</strong> <code>s[s.length()]</code> is not undefined behavior, but instead returns a value which is the default value of the underlying character type (<code>'\0'</code> for <code>char</code>).</p>
+<p>To add or remove individual characters or substrings, the <code>insert()</code> and <code>erase()</code> member functions can be used (don't try to write to <code>s[s.length()]</code>):</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1"></a><a href="#__codelineno-9-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">string</span><span class="w"> </span><span class="n">book</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"a hobbit"</span><span class="p">;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2"></a><a href="#__codelineno-9-2"><span class="linenos" data-linenos="2 "></span></a>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3"></a><a href="#__codelineno-9-3"><span class="linenos" data-linenos="3 "></span></a><span class="n">book</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"In "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">book</span><span class="p">;</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4"></a><a href="#__codelineno-9-4"><span class="linenos" data-linenos="4 "></span></a><span class="w">    </span><span class="c1">// book is now "In a hobbit"</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5"></a><a href="#__codelineno-9-5"><span class="linenos" data-linenos="5 "></span></a><span class="n">book</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s">"hole in the ground, there lived a "</span><span class="p">);</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6"></a><a href="#__codelineno-9-6"><span class="linenos" data-linenos="6 "></span></a><span class="w">    </span><span class="c1">// book is now "In a hole in the ground, there lived a hobbit"</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7"></a><a href="#__codelineno-9-7"><span class="linenos" data-linenos="7 "></span></a><span class="n">book</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">);</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8"></a><a href="#__codelineno-9-8"><span class="linenos" data-linenos="8 "></span></a><span class="w">    </span><span class="c1">// book is now "In a hole lived a hobbit"</span>
+</span></code></pre></div>
+<p>There is also <code>replace()</code>, which is a combination of both of <code>erase()</code> and <code>insert()</code>.</p>
+<p>Substrings can be extracted from a <code>std::string</code> using the <code>substr()</code> member function:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1"></a><a href="#__codelineno-10-1"><span class="linenos" data-linenos="1 "></span></a><span class="n">string</span><span class="w"> </span><span class="n">wizard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Gandalf the Gray"</span><span class="p">;</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2"></a><a href="#__codelineno-10-2"><span class="linenos" data-linenos="2 "></span></a>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3"></a><a href="#__codelineno-10-3"><span class="linenos" data-linenos="3 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wizard</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span><span class="w">    </span><span class="c1">// s1 is "Gandalf"</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4"></a><a href="#__codelineno-10-4"><span class="linenos" data-linenos="4 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wizard</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span><span class="w">    </span><span class="c1">// s2 is "the"</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5"></a><a href="#__codelineno-10-5"><span class="linenos" data-linenos="5 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">s3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wizard</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span><span class="w">      </span><span class="c1">// s3 is "Gray"</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6"></a><a href="#__codelineno-10-6"><span class="linenos" data-linenos="6 "></span></a><span class="w">                                  </span><span class="c1">// or wizard.substr(12, 4) or wizard.substr(12, string::npos)</span>
+</span></code></pre></div>
+<p>The return type of <code>substr()</code> is <code>std::string</code>, which is a <strong>new</strong> variable containing a <strong>copy</strong> of (part of) the contents of the original <code>std::string</code>.</p>
+<p>Finally there is <code>append()</code> which is considered better style than using the <code>+=</code> operator as it is potentially more efficient:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1"></a><a href="#__codelineno-11-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">wizard2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Saruman"</span><span class="n">s</span><span class="p">;</span><span class="w">    </span><span class="c1">// note: suffix produces a string</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2"></a><a href="#__codelineno-11-2"><span class="linenos" data-linenos="2 "></span></a><span class="n">wizard2</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">" the White"</span><span class="p">);</span><span class="w"> </span><span class="c1">// wizard2 becomes "Saruman the White"</span>
+</span></code></pre></div>
+<h2 id="Conversions-and-literals">Conversions and literals<a class="headerlink" href="#Conversions-and-literals" title="Permanent link">¶</a></h2>
+<p>Sometimes it is necessary to convert between a <code>std::string</code> and other (often built-in) types, such as converting to and from an integer or floating-point number. The Standard Library function template <code>to_string</code> is overloaded to cope with different (built-in) types:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a><a href="#__codelineno-12-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">n1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.23</span><span class="p">;</span><span class="w">           </span><span class="c1">// n1 is type double</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2"></a><a href="#__codelineno-12-2"><span class="linenos" data-linenos="2 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">n2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">45</span><span class="p">;</span><span class="w">             </span><span class="c1">// n2 is type int</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3"></a><a href="#__codelineno-12-3"><span class="linenos" data-linenos="3 "></span></a>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4"></a><a href="#__codelineno-12-4"><span class="linenos" data-linenos="4 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">to_string</span><span class="p">(</span><span class="n">n1</span><span class="p">);</span><span class="w">  </span><span class="c1">// s1 is "1.230000"</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5"></a><a href="#__codelineno-12-5"><span class="linenos" data-linenos="5 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">to_string</span><span class="p">(</span><span class="n">n2</span><span class="p">);</span><span class="w">  </span><span class="c1">// s2 is "45"</span>
+</span></code></pre></div>
+<p>Converting the other way, the group of functions <code>sto…()</code> allow conversion to an integer or floating-point type from an input <code>std::string</code> (often usefully a sub-string). The full list is: <code>stoi()</code>, <code>stol()</code>, <code>stoul()</code>, <code>stoll()</code>, <code>stoull()</code>, <code>stof()</code>, <code>stod()</code> and <code>stold()</code>.</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1"></a><a href="#__codelineno-13-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">n3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stoi</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span><span class="w">   </span><span class="c1">// n3 is of type int</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2"></a><a href="#__codelineno-13-2"><span class="linenos" data-linenos="2 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">n4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stold</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span><span class="w">  </span><span class="c1">// n4 is of type long double</span>
+</span></code></pre></div>
+<p>For these <code>sto…()</code> conversion functions which return an integer type, the optional third parameter is the numerical base to be applied (this defaults to 10), while for all of them the optional second parameter is a pointer to <code>std::size_t</code> variable used to indicate the index into the <code>std::string</code> of the first unused character (this defaults to <code>nullptr</code>, that is no index is written to this pointer address).</p>
+<p>It is possible to declare <code>std::string</code> variables using syntax which is very similar to that for string literals, which uses the <em>literal suffix</em> <code>s</code>:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1"></a><a href="#__codelineno-14-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">h1</span><span class="p">{</span><span class="w"> </span><span class="s">"Merry"</span><span class="n">s</span><span class="w"> </span><span class="p">};</span><span class="w">               </span><span class="c1">// h1 is mutable</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2"></a><a href="#__codelineno-14-2"><span class="linenos" data-linenos="2 "></span></a><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">h2</span><span class="p">{</span><span class="w"> </span><span class="s">"Pippin"</span><span class="n">s</span><span class="w"> </span><span class="p">};</span><span class="w">        </span><span class="c1">// h2 cannot be altered</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3"></a><a href="#__codelineno-14-3"><span class="linenos" data-linenos="3 "></span></a><span class="k">constexpr</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">h3</span><span class="p">{</span><span class="w"> </span><span class="s">"Samwise"</span><span class="n">s</span><span class="w"> </span><span class="p">};</span><span class="w">   </span><span class="c1">// h3 can be used in constexpr contexts</span>
+</span></code></pre></div>
+<p>In addition, a single (possibly empty) <code>std::string</code> literal can be safely concatenated with any number of string and character literals:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1"></a><a href="#__codelineno-15-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">alphabet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">""</span><span class="n">s</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"ABCDEF"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="sc">' '</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"abcde"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="sc">'f'</span><span class="p">;</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2"></a><a href="#__codelineno-15-2"><span class="linenos" data-linenos="2 "></span></a><span class="w">             </span><span class="c1">// alphabet contains "ABCDEF abcdef" and is of type std::string</span>
+</span></code></pre></div>
+<p>Here <code>alphabet</code> has type <code>std::string</code>, and the concatenation is usually performed at run-time (use <code>constexpr</code> to make it happen at compile-time).</p>
+<p>A <code>std::string</code> provides direct access to its underlying array-of-<code>char</code> representation through two member functions: <code>c_str()</code> and <code>data()</code>. The difference between the two is that <code>c_str()</code> returns a <strong>read-only</strong> (<code>const char *</code>) pointer to an NTMBS (see Chapter 1), while <code>data()</code> returns a <strong>writable</strong> (<code>char *</code>) pointer to the same (pre-C++11 did not guarantee the null terminator to be present for <code>data()</code>). Where you have the choice, use <code>c_str()</code> as it is available for <code>const std::string</code> objects (itself being a <code>const</code> member function).</p>
+<p><strong>Experiment:</strong></p>
+<ul>
+<li>
+<p>Modify <code>string_to_uppercase()</code> to use <code>data()</code> inside a regular for-loop to do its work. Hint: continue to use a loop index, the syntax may surprise you.</p>
+</li>
+<li>
+<p>Now modify this program to use pointer arithmetic instead of a loop index.</p>
+</li>
+<li>
+<p>Modify this program again to use <code>begin()</code> and <code>end()</code>.</p>
+</li>
+</ul>
+<h2 id="String-views">String views<a class="headerlink" href="#String-views" title="Permanent link">¶</a></h2>
+<p>There is a fourth string-like type (besides literal string, built-in array of <code>char</code> and <code>std::string</code>) called <code>std::string_view</code>, which provides a "half-way house" between a fully-fledged string type and raw array access. Typically it is implemented with only two fields (pointer and length); its main advantage over <code>std::string</code> is that it can be constructed and passed around more cheaply in many cases.</p>
+<p>The <code>std::string_view</code> type only provides a subset of the features provided by <code>std::string</code>, in particular it does <strong>not</strong> support either in-place modification or concatenation. It also does <strong>not</strong> "own" the resource it refers to, therefore care must be taken to ensure that a <code>std::string_view</code> object does not outlive the entity from which it was constructed (usually a <code>std::string</code> or <code>const char *</code>—construction from a string literal is always safe.). It is safe when used as a function parameter (as an alternative to <code>const std::string&amp;</code> or <code>const char *</code>), and is sometimes safe as a return type (instead of <code>const char *</code>). Finally, it does not own or include a null terminator, unless the entity from which it is constructed has one; this behavior is useful in cases where a sliding textual "window" over a larger string entity is needed.</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1"></a><a href="#__codelineno-16-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="n">string_view</span><span class="w"> </span><span class="n">v1</span><span class="p">{</span><span class="w"> </span><span class="s">"Elrond"</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// string_view constructed from const char *</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2"></a><a href="#__codelineno-16-2"><span class="linenos" data-linenos=" 2 "></span></a><span class="n">string_view</span><span class="w"> </span><span class="n">v2</span><span class="p">{</span><span class="w"> </span><span class="s">"Arwen"</span><span class="n">s</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// Error! attempt to construct string_view from temporary std::string</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3"></a><a href="#__codelineno-16-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">v3</span><span class="p">{</span><span class="w"> </span><span class="s">"Galadriel"</span><span class="n">sv</span><span class="w"> </span><span class="p">};</span><span class="w">   </span><span class="c1">// std::string_view literal</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4"></a><a href="#__codelineno-16-4"><span class="linenos" data-linenos=" 4 "></span></a>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5"></a><a href="#__codelineno-16-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">v1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span><span class="w">         </span><span class="c1">// outputs "Elrond"</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6"></a><a href="#__codelineno-16-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">v2</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w">              </span><span class="c1">// outputs "A"</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7"></a><a href="#__codelineno-16-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">v3</span><span class="p">.</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span><span class="w">  </span><span class="c1">// Possibly unsafe, no guarantee of terminating '\0'</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8"></a><a href="#__codelineno-16-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="n">v3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">'C'</span><span class="p">;</span><span class="w">                </span><span class="c1">// Error! no write access</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9"></a><a href="#__codelineno-16-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="n">v3</span><span class="p">.</span><span class="n">data</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">'C'</span><span class="p">;</span><span class="w">         </span><span class="c1">// Error! no write access</span>
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10"></a><a href="#__codelineno-16-10"><span class="linenos" data-linenos="10 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">elves</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">v3</span><span class="p">;</span><span class="w">       </span><span class="c1">// Error! operator+ (concatenation) not supported</span>
+</span></code></pre></div>
+<p>The following program demonstrates a function called <code>print_reversed()</code> with a <code>std::string_view</code> as a function parameter, called with each of: a pointer, a string literal, a <code>char</code>-array, a <code>std::string</code> and a <code>std::string_view</code>.</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1"></a><a href="#__codelineno-17-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="c1">// 07-reversed.cpp : output different "string" types using a string_view</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2"></a><a href="#__codelineno-17-2"><span class="linenos" data-linenos=" 2 "></span></a>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3"></a><a href="#__codelineno-17-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4"></a><a href="#__codelineno-17-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5"></a><a href="#__codelineno-17-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6"></a><a href="#__codelineno-17-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7"></a><a href="#__codelineno-17-7"><span class="linenos" data-linenos=" 7 "></span></a>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8"></a><a href="#__codelineno-17-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="kt">void</span><span class="w"> </span><span class="nf">print_reversed</span><span class="p">(</span><span class="n">string_view</span><span class="w"> </span><span class="n">sv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9"></a><a href="#__codelineno-17-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">crbegin</span><span class="p">(</span><span class="n">sv</span><span class="p">);</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">crend</span><span class="p">(</span><span class="n">sv</span><span class="p">);</span><span class="w"> </span><span class="o">++</span><span class="n">iter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10"></a><a href="#__codelineno-17-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">iter</span><span class="p">;</span>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11"></a><a href="#__codelineno-17-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12"></a><a href="#__codelineno-17-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13"></a><a href="#__codelineno-17-13"><span class="linenos" data-linenos="13 "></span></a><span class="p">}</span>
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14"></a><a href="#__codelineno-17-14"><span class="linenos" data-linenos="14 "></span></a>
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15"></a><a href="#__codelineno-17-15"><span class="linenos" data-linenos="15 "></span></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16"></a><a href="#__codelineno-17-16"><span class="linenos" data-linenos="16 "></span></a><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Elf"</span><span class="p">;</span>
+</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17"></a><a href="#__codelineno-17-17"><span class="linenos" data-linenos="17 "></span></a><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">s2</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Dwarf"</span><span class="p">;</span>
+</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18"></a><a href="#__codelineno-17-18"><span class="linenos" data-linenos="18 "></span></a><span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">s3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Hobbit"</span><span class="n">s</span><span class="p">;</span>
+</span><span id="__span-17-19"><a id="__codelineno-17-19" name="__codelineno-17-19"></a><a href="#__codelineno-17-19"><span class="linenos" data-linenos="19 "></span></a><span class="w">    </span><span class="n">string_view</span><span class="w"> </span><span class="n">s4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Orc"</span><span class="n">sv</span><span class="p">;</span>
+</span><span id="__span-17-20"><a id="__codelineno-17-20" name="__codelineno-17-20"></a><a href="#__codelineno-17-20"><span class="linenos" data-linenos="20 "></span></a>
+</span><span id="__span-17-21"><a id="__codelineno-17-21" name="__codelineno-17-21"></a><a href="#__codelineno-17-21"><span class="linenos" data-linenos="21 "></span></a><span class="w">    </span><span class="n">print_reversed</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+</span><span id="__span-17-22"><a id="__codelineno-17-22" name="__codelineno-17-22"></a><a href="#__codelineno-17-22"><span class="linenos" data-linenos="22 "></span></a><span class="w">    </span><span class="n">print_reversed</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+</span><span id="__span-17-23"><a id="__codelineno-17-23" name="__codelineno-17-23"></a><a href="#__codelineno-17-23"><span class="linenos" data-linenos="23 "></span></a><span class="w">    </span><span class="n">print_reversed</span><span class="p">(</span><span class="n">s3</span><span class="p">);</span>
+</span><span id="__span-17-24"><a id="__codelineno-17-24" name="__codelineno-17-24"></a><a href="#__codelineno-17-24"><span class="linenos" data-linenos="24 "></span></a><span class="w">    </span><span class="n">print_reversed</span><span class="p">(</span><span class="n">s4</span><span class="p">);</span>
+</span><span id="__span-17-25"><a id="__codelineno-17-25" name="__codelineno-17-25"></a><a href="#__codelineno-17-25"><span class="linenos" data-linenos="25 "></span></a><span class="w">    </span><span class="n">print_reversed</span><span class="p">(</span><span class="s">"Man"</span><span class="p">);</span>
+</span><span id="__span-17-26"><a id="__codelineno-17-26" name="__codelineno-17-26"></a><a href="#__codelineno-17-26"><span class="linenos" data-linenos="26 "></span></a><span class="p">}</span>
+</span></code></pre></div>
+<p>A few things to note about this program:</p>
+<ul>
+<li>
+<p>The function <code>print_reversed()</code> uses a constant reverse iterator to loop over its input. If you're not familiar with this idiom, you may wish to review program <code>05-begin-end.cpp</code> and the table below it from Chapter 5.</p>
+</li>
+<li>
+<p>The iterator variable <code>iter</code> is dereferenced as <code>*iter</code> to obtain a single character for printing.</p>
+</li>
+<li>
+<p>The function <code>print_reversed()</code> is called from <code>main()</code> repeatedly but with different typed arguments, all of which are resolved at compile-time and are <em>implicitly convertible</em> to <code>std::string_view</code>.</p>
+</li>
+</ul>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>Change the type of <code>print_reversed()</code>'s parameter to <code>const string&amp;</code>. Does the program compile?</p>
+</li>
+<li>
+<p>What about if you use a <code>const char[]</code>? Hint: remember array decay.</p>
+</li>
+<li>
+<p>Now modify this function so that it <strong>returns</strong> its input reversed. What parameter type and return type would you choose?</p>
+</li>
+</ul>
+<h2 id="Vectors-and-iterators">Vectors and iterators<a class="headerlink" href="#Vectors-and-iterators" title="Permanent link">¶</a></h2>
+<p>A key concept of C++ is that the Standard Library container types, of which <code>std::vector</code> is one, is that elements are meant to be manipulated using <em>iterators</em>. (We have seen the <code>std::string</code> member functions <code>insert()</code> and <code>erase()</code> being used with indices, however these can use iterators instead.) An iterator is a <em>pointer-like object</em> that when dereferenced, yields exactly one object from within a container; thus the <code>begin()</code> and <code>end()</code> family of functions should each be thought of as returning an iterator, rather than a pointer.</p>
+<p>The following program populates a <code>std::vector</code> of integers from user input, and then outputs it in numerically sorted order.</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1"></a><a href="#__codelineno-18-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="c1">// 07-vector.cpp : read integers from user, sort them and then output</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2"></a><a href="#__codelineno-18-2"><span class="linenos" data-linenos=" 2 "></span></a>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3"></a><a href="#__codelineno-18-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4"></a><a href="#__codelineno-18-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5"></a><a href="#__codelineno-18-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;algorithm&gt;</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6"></a><a href="#__codelineno-18-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iterator&gt;</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7"></a><a href="#__codelineno-18-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8"></a><a href="#__codelineno-18-8"><span class="linenos" data-linenos=" 8 "></span></a>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9"></a><a href="#__codelineno-18-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10"></a><a href="#__codelineno-18-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">;</span>
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11"></a><a href="#__codelineno-18-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12"></a><a href="#__codelineno-18-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Please enter a number (99 to quit): "</span><span class="p">;</span>
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13"></a><a href="#__codelineno-18-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">{};</span>
+</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14"></a><a href="#__codelineno-18-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">        </span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15"></a><a href="#__codelineno-18-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">99</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16"></a><a href="#__codelineno-18-16"><span class="linenos" data-linenos="16 "></span></a><span class="w">            </span><span class="k">break</span><span class="p">;</span>
+</span><span id="__span-18-17"><a id="__codelineno-18-17" name="__codelineno-18-17"></a><a href="#__codelineno-18-17"><span class="linenos" data-linenos="17 "></span></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-18-18"><a id="__codelineno-18-18" name="__codelineno-18-18"></a><a href="#__codelineno-18-18"><span class="linenos" data-linenos="18 "></span></a><span class="w">        </span><span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span><span id="__span-18-19"><a id="__codelineno-18-19" name="__codelineno-18-19"></a><a href="#__codelineno-18-19"><span class="linenos" data-linenos="19 "></span></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-18-20"><a id="__codelineno-18-20" name="__codelineno-18-20"></a><a href="#__codelineno-18-20"><span class="linenos" data-linenos="20 "></span></a>
+</span><span id="__span-18-21"><a id="__codelineno-18-21" name="__codelineno-18-21"></a><a href="#__codelineno-18-21"><span class="linenos" data-linenos="21 "></span></a><span class="w">    </span><span class="n">sort</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">v</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="p">(</span><span class="n">v</span><span class="p">));</span>
+</span><span id="__span-18-22"><a id="__codelineno-18-22" name="__codelineno-18-22"></a><a href="#__codelineno-18-22"><span class="linenos" data-linenos="22 "></span></a><span class="w">    </span><span class="n">copy</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">v</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="p">(</span><span class="n">v</span><span class="p">),</span><span class="w"> </span><span class="n">ostream_iterator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">cout</span><span class="p">,</span><span class="w"> </span><span class="s">" "</span><span class="p">));</span>
+</span><span id="__span-18-23"><a id="__codelineno-18-23" name="__codelineno-18-23"></a><a href="#__codelineno-18-23"><span class="linenos" data-linenos="23 "></span></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+</span><span id="__span-18-24"><a id="__codelineno-18-24" name="__codelineno-18-24"></a><a href="#__codelineno-18-24"><span class="linenos" data-linenos="24 "></span></a><span class="p">}</span>
+</span></code></pre></div>
+<p>A few things to note about this program:</p>
+<ul>
+<li>
+<p>We start with an empty <code>std::vector</code>, this means that the <code>int</code> element type <strong>must</strong> be specified (within angle brackets) as it cannot be otherwise deduced. This type is fixed at compile-time.</p>
+</li>
+<li>
+<p>A "forever" loop with local variable <code>i</code> is used to avoid the need for either multiple <code>cout</code> statements (which would be code duplication) or a do-while loop (which would most likely cause <code>99</code> to be appended to the <code>vector</code>, which we don't want).</p>
+</li>
+<li>
+<p>The <code>push_back()</code> member function of <code>vector</code> is used to make <code>i</code> the new last element, this "grows" the container automatically as needed.</p>
+</li>
+<li>
+<p>The Standard Libary <em>algorithm</em> <code>std::sort()</code> gets all of the information about the <code>vector</code> that it needs in order to operate from the two iterators provided as parameters. (It can be relied upon to be an efficient algorithm, probably performing better than hand-written code—there is no need or advantage of using C's <code>qsort()</code>.)</p>
+</li>
+<li>
+<p>Instead of a traditional or range-for loop, a second algorithm <code>std::copy()</code> is used. As might be guessed this copies everything from the first iterator up to, but not including, the second iterator to its third parameter, which is actually an <em>output iterator</em>. There is no "magic" involved, all you need to understand is that a <code>std::output_iterator</code> <em>object</em> takes a single type of its output between triangular brackets (here it is <code>int</code>) and the output stream and optional delimiter are specified as parameters. (This is boilerplate code that can be reused in your own programs, possibly with different types and delimiters.)</p>
+</li>
+</ul>
+<p><strong>Experiment:</strong></p>
+<ul>
+<li>
+<p>Type <code>99</code> as the first input value. Does the program crash? Does this surprise you? Check that <code>v</code> is <code>empty()</code>.</p>
+</li>
+<li>
+<p>Modify the program to print out the highest numbers first. Hint: use <code>crbegin()</code> and <code>crend()</code>.</p>
+</li>
+<li>
+<p>Change to using a range-for loop instead of <code>std::copy()</code> to output the <code>vector</code>. Hint: use <code>const auto&amp;</code>.</p>
+</li>
+<li>
+<p>Use <strong>member</strong> functions <code>begin()</code> and <code>end()</code> in the call to <code>std::sort()</code>. Does the compile to the same thing? Which style do you prefer?</p>
+</li>
+<li>
+<p>Rewrite the second <code>for</code>-loop using an index variable and subscript access. Do you still prefer this form?</p>
+</li>
+</ul>
+<p>There are many member functions belonging to <code>std::vector</code> and the other standard containers, and even experienced C++ programmers don't remember them all. There are also many (over 100) function templates (algorithms) which operate with the standard containers through iterators; where there is a choice between using both, the member function should be used as this will be specialized for the container type (thus potentially more efficient). There is almost never a need to write a mini-algorithm which operates within a loop over the elements of a container, as would be needed in C; they have already been implemented in the Standard Library ready for you to use.</p>
+<p>When you reach for a container, <code>std::vector</code> is often the best fit, and should be your natural first choice. Should you decide that one of the other container types is needed, this would usually be a design decision made early in the development of your program. There is uniformity in the naming of the member functions, so all containers support <code>clear()</code>, for example. However as soon as you delve into the implementation details, such similarity appears superficial. It is important to have a basic understanding of the implementation of each container such that their individual advantages and limitations are understood, in order for the correct one to be chosen and used effectively.</p>
+<p>As an example, consider the use of <code>std::find()</code> versus member function <code>find()</code> when using <code>std::string</code>, <code>std::vector</code> and <code>std::set</code>; this function finds the first occurence of its parameter in the specified container. The <code>std::set</code> container is similar to <code>std::vector</code> except that it maintains its elements in sorted order. The differences are:</p>
+<ul>
+<li>
+<p>For <code>std::string</code>, member function <code>find()</code> returns an <strong>index</strong> having performed a <em>linear search</em> (checking each character element in turn).</p>
+</li>
+<li>
+<p>For <code>std::vector</code>, algorithm <code>std::find()</code> returns an <strong>iterator</strong>, again performing a linear search.</p>
+</li>
+<li>
+<p>For <code>std::set</code>, member function <code>find()</code> returns an <strong>iterator</strong> having performed a <em>binary search</em> (repeatedly dividing the range of values in half). This is quicker than using <code>std::find()</code>.</p>
+</li>
+</ul>
+<p>For <code>std::string</code>s if the search criterion is not found, special value <code>std::string::npos</code> is returned ("no position"), whilst the iterator which indicates not found is <code>end()</code> (<strong>not</strong> <code>nullptr</code> or zero). The following program demonstrates this:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1"></a><a href="#__codelineno-19-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="c1">// 07-find.cpp : find and erase a single element</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2"></a><a href="#__codelineno-19-2"><span class="linenos" data-linenos=" 2 "></span></a>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3"></a><a href="#__codelineno-19-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4"></a><a href="#__codelineno-19-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;algorithm&gt;</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5"></a><a href="#__codelineno-19-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6"></a><a href="#__codelineno-19-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7"></a><a href="#__codelineno-19-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;set&gt;</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8"></a><a href="#__codelineno-19-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iterator&gt;</span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9"></a><a href="#__codelineno-19-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10"></a><a href="#__codelineno-19-10"><span class="linenos" data-linenos="10 "></span></a>
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11"></a><a href="#__codelineno-19-11"><span class="linenos" data-linenos="11 "></span></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12"></a><a href="#__codelineno-19-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">a</span><span class="p">{</span><span class="w"> </span><span class="s">"hello"</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13"></a><a href="#__codelineno-19-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">    </span><span class="n">vector</span><span class="w"> </span><span class="n">v</span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14"></a><a href="#__codelineno-19-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">    </span><span class="n">set</span><span class="w"> </span><span class="n">s</span><span class="p">{</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-19-15"><a id="__codelineno-19-15" name="__codelineno-19-15"></a><a href="#__codelineno-19-15"><span class="linenos" data-linenos="15 "></span></a>
+</span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16"></a><a href="#__codelineno-19-16"><span class="linenos" data-linenos="16 "></span></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Before:</span><span class="se">\n</span><span class="s">string: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">vector: "</span><span class="p">;</span>
+</span><span id="__span-19-17"><a id="__codelineno-19-17" name="__codelineno-19-17"></a><a href="#__codelineno-19-17"><span class="linenos" data-linenos="17 "></span></a><span class="w">    </span><span class="n">copy</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">v</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="p">(</span><span class="n">v</span><span class="p">),</span><span class="w"> </span><span class="n">ostream_iterator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">cout</span><span class="p">,</span><span class="w"> </span><span class="s">" "</span><span class="p">));</span><span class="w">    </span>
+</span><span id="__span-19-18"><a id="__codelineno-19-18" name="__codelineno-19-18"></a><a href="#__codelineno-19-18"><span class="linenos" data-linenos="18 "></span></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">set: "</span><span class="p">;</span>
+</span><span id="__span-19-19"><a id="__codelineno-19-19" name="__codelineno-19-19"></a><a href="#__codelineno-19-19"><span class="linenos" data-linenos="19 "></span></a><span class="w">    </span><span class="n">copy</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="n">ostream_iterator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">cout</span><span class="p">,</span><span class="w"> </span><span class="s">" "</span><span class="p">));</span>
+</span><span id="__span-19-20"><a id="__codelineno-19-20" name="__codelineno-19-20"></a><a href="#__codelineno-19-20"><span class="linenos" data-linenos="20 "></span></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+</span><span id="__span-19-21"><a id="__codelineno-19-21" name="__codelineno-19-21"></a><a href="#__codelineno-19-21"><span class="linenos" data-linenos="21 "></span></a>
+</span><span id="__span-19-22"><a id="__codelineno-19-22" name="__codelineno-19-22"></a><a href="#__codelineno-19-22"><span class="linenos" data-linenos="22 "></span></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">f1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="sc">'l'</span><span class="p">);</span>
+</span><span id="__span-19-23"><a id="__codelineno-19-23" name="__codelineno-19-23"></a><a href="#__codelineno-19-23"><span class="linenos" data-linenos="23 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">f1</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-24"><a id="__codelineno-19-24" name="__codelineno-19-24"></a><a href="#__codelineno-19-24"><span class="linenos" data-linenos="24 "></span></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Found in string at position: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">f1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+</span><span id="__span-19-25"><a id="__codelineno-19-25" name="__codelineno-19-25"></a><a href="#__codelineno-19-25"><span class="linenos" data-linenos="25 "></span></a><span class="w">        </span><span class="n">a</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+</span><span id="__span-19-26"><a id="__codelineno-19-26" name="__codelineno-19-26"></a><a href="#__codelineno-19-26"><span class="linenos" data-linenos="26 "></span></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-19-27"><a id="__codelineno-19-27" name="__codelineno-19-27"></a><a href="#__codelineno-19-27"><span class="linenos" data-linenos="27 "></span></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">f2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">find</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">v</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="p">(</span><span class="n">v</span><span class="p">),</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span>
+</span><span id="__span-19-28"><a id="__codelineno-19-28" name="__codelineno-19-28"></a><a href="#__codelineno-19-28"><span class="linenos" data-linenos="28 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">f2</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">end</span><span class="p">(</span><span class="n">v</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-29"><a id="__codelineno-19-29" name="__codelineno-19-29"></a><a href="#__codelineno-19-29"><span class="linenos" data-linenos="29 "></span></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Found in vector: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">f2</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+</span><span id="__span-19-30"><a id="__codelineno-19-30" name="__codelineno-19-30"></a><a href="#__codelineno-19-30"><span class="linenos" data-linenos="30 "></span></a><span class="w">        </span><span class="n">v</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">f2</span><span class="p">);</span>
+</span><span id="__span-19-31"><a id="__codelineno-19-31" name="__codelineno-19-31"></a><a href="#__codelineno-19-31"><span class="linenos" data-linenos="31 "></span></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-19-32"><a id="__codelineno-19-32" name="__codelineno-19-32"></a><a href="#__codelineno-19-32"><span class="linenos" data-linenos="32 "></span></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">f3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>
+</span><span id="__span-19-33"><a id="__codelineno-19-33" name="__codelineno-19-33"></a><a href="#__codelineno-19-33"><span class="linenos" data-linenos="33 "></span></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">f3</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">end</span><span class="p">(</span><span class="n">s</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-34"><a id="__codelineno-19-34" name="__codelineno-19-34"></a><a href="#__codelineno-19-34"><span class="linenos" data-linenos="34 "></span></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Found in set: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">f3</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+</span><span id="__span-19-35"><a id="__codelineno-19-35" name="__codelineno-19-35"></a><a href="#__codelineno-19-35"><span class="linenos" data-linenos="35 "></span></a><span class="w">        </span><span class="n">s</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">f3</span><span class="p">);</span>
+</span><span id="__span-19-36"><a id="__codelineno-19-36" name="__codelineno-19-36"></a><a href="#__codelineno-19-36"><span class="linenos" data-linenos="36 "></span></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-19-37"><a id="__codelineno-19-37" name="__codelineno-19-37"></a><a href="#__codelineno-19-37"><span class="linenos" data-linenos="37 "></span></a>
+</span><span id="__span-19-38"><a id="__codelineno-19-38" name="__codelineno-19-38"></a><a href="#__codelineno-19-38"><span class="linenos" data-linenos="38 "></span></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"After:</span><span class="se">\n</span><span class="s">string: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">vector: "</span><span class="p">;</span>
+</span><span id="__span-19-39"><a id="__codelineno-19-39" name="__codelineno-19-39"></a><a href="#__codelineno-19-39"><span class="linenos" data-linenos="39 "></span></a><span class="w">    </span><span class="n">copy</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">v</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="p">(</span><span class="n">v</span><span class="p">),</span><span class="w"> </span><span class="n">ostream_iterator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">cout</span><span class="p">,</span><span class="w"> </span><span class="s">" "</span><span class="p">));</span><span class="w">    </span>
+</span><span id="__span-19-40"><a id="__codelineno-19-40" name="__codelineno-19-40"></a><a href="#__codelineno-19-40"><span class="linenos" data-linenos="40 "></span></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">set: "</span><span class="p">;</span>
+</span><span id="__span-19-41"><a id="__codelineno-19-41" name="__codelineno-19-41"></a><a href="#__codelineno-19-41"><span class="linenos" data-linenos="41 "></span></a><span class="w">    </span><span class="n">copy</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="n">ostream_iterator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">cout</span><span class="p">,</span><span class="w"> </span><span class="s">" "</span><span class="p">));</span>
+</span><span id="__span-19-42"><a id="__codelineno-19-42" name="__codelineno-19-42"></a><a href="#__codelineno-19-42"><span class="linenos" data-linenos="42 "></span></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+</span><span id="__span-19-43"><a id="__codelineno-19-43" name="__codelineno-19-43"></a><a href="#__codelineno-19-43"><span class="linenos" data-linenos="43 "></span></a><span class="p">}</span>
+</span></code></pre></div>
+<p>The output from running this program is:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1"></a><a href="#__codelineno-20-1"><span class="linenos" data-linenos=" 1 "></span></a>Before:
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2"></a><a href="#__codelineno-20-2"><span class="linenos" data-linenos=" 2 "></span></a>string: hello
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3"></a><a href="#__codelineno-20-3"><span class="linenos" data-linenos=" 3 "></span></a>vector: 1 9 7 3
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4"></a><a href="#__codelineno-20-4"><span class="linenos" data-linenos=" 4 "></span></a>set: 3 4 6 8
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5"></a><a href="#__codelineno-20-5"><span class="linenos" data-linenos=" 5 "></span></a>Found in string at position: 2
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6"></a><a href="#__codelineno-20-6"><span class="linenos" data-linenos=" 6 "></span></a>Found in vector: 7
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7"></a><a href="#__codelineno-20-7"><span class="linenos" data-linenos=" 7 "></span></a>Found in set: 6
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8"></a><a href="#__codelineno-20-8"><span class="linenos" data-linenos=" 8 "></span></a>After:
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9"></a><a href="#__codelineno-20-9"><span class="linenos" data-linenos=" 9 "></span></a>string: helo
+</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10"></a><a href="#__codelineno-20-10"><span class="linenos" data-linenos="10 "></span></a>vector: 1 9 3
+</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11"></a><a href="#__codelineno-20-11"><span class="linenos" data-linenos="11 "></span></a>set: 3 4 8
+</span></code></pre></div>
+<p>Take time to study this program as it contains some important concepts:</p>
+<ul>
+<li>
+<p>The <code>main()</code> program consists of four parts, the second and fourth of which are near-identical and simply print out all the containers before and after modification.</p>
+</li>
+<li>
+<p>The first part assigns a <code>std::string</code> from a string literal, and a <code>std::vector</code> and <code>std::set</code> from two different initializer lists. Note that <code>std::set</code> can only hold unique values, so the container begins with a size of four, not five as for the initializer list (because of the duplicated value <code>3</code>).</p>
+</li>
+<li>
+<p>The interesting part of the program is the third part, itself split into three. The logic is the same, search for an element value with the correct form of <code>find()</code>, compare it against the "not found" type for the specific container, and if found then erase it. The form of <code>erase()</code> used for <code>std::string</code> needs a length for the second parameter, while for <code>std::vector</code> and <code>std::set</code> the form used takes an iterator as the single element to erase.</p>
+</li>
+</ul>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>Sort the <code>std::vector</code> and use a binary search instead of a linear one. Hint: use <code>std::lower_bound()</code> not <code>std::binary_search()</code>.</p>
+</li>
+<li>
+<p>Experiment with adding values to the containers, at the beginning, in the middle, and at the end. Use a mixture of member function <code>push_back()</code> (where possible) and member function <code>insert()</code> or <code>std::insert()</code> where applicable.</p>
+</li>
+</ul>
+<h2 id="Spans-and-arrays">Spans and arrays<a class="headerlink" href="#Spans-and-arrays" title="Permanent link">¶</a></h2>
+<p>It can be very inefficient to copy <code>std::vector</code>s by value, as copies of both the <code>vector</code> object, and also the array it manages, need to be made. The preferred way to pass a <code>vector</code> to a function is to use a reference, or a <code>const</code> reference in cases where the original <code>vector</code> should not be modified.</p>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>Write a function called <code>populate_int()</code> which takes a <code>vector&lt;int&gt;</code> as its parameter and implements the logic of the <code>for</code>-loop in <code>07-vector.cpp</code>. Call this function from <code>main()</code> instead of using a <code>for</code>-loop.</p>
+</li>
+<li>
+<p>Now use <code>double</code> instead of <code>int</code> in the program. How many code changes are needed?</p>
+</li>
+</ul>
+<p>In the style of <code>std::string_view</code> being implicitly constructible from charater sequences, there exists the type <code>std::span</code> which provides a similar function for array-style containers (those which hold their elements contiguously in memory). The following program contains a function <code>print_ints()</code> whose parameter is of type <code>std::span&lt;int&gt;</code> and which iterates over this sequence:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1"></a><a href="#__codelineno-21-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="c1">// 07-span.cpp : convert different container types to span and print them out</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2"></a><a href="#__codelineno-21-2"><span class="linenos" data-linenos=" 2 "></span></a>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3"></a><a href="#__codelineno-21-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4"></a><a href="#__codelineno-21-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;span&gt;</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5"></a><a href="#__codelineno-21-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;array&gt;</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6"></a><a href="#__codelineno-21-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7"></a><a href="#__codelineno-21-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8"></a><a href="#__codelineno-21-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9"></a><a href="#__codelineno-21-9"><span class="linenos" data-linenos=" 9 "></span></a>
+</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10"></a><a href="#__codelineno-21-10"><span class="linenos" data-linenos="10 "></span></a><span class="kt">void</span><span class="w"> </span><span class="nf">print_ints</span><span class="p">(</span><span class="n">span</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11"></a><a href="#__codelineno-21-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">sep</span><span class="p">{</span><span class="w"> </span><span class="s">""</span><span class="n">sv</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12"></a><a href="#__codelineno-21-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="p">;</span>
+</span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13"></a><a href="#__codelineno-21-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">        </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">", "</span><span class="n">sv</span><span class="p">;</span>
+</span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14"></a><a href="#__codelineno-21-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-21-15"><a id="__codelineno-21-15" name="__codelineno-21-15"></a><a href="#__codelineno-21-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+</span><span id="__span-21-16"><a id="__codelineno-21-16" name="__codelineno-21-16"></a><a href="#__codelineno-21-16"><span class="linenos" data-linenos="16 "></span></a><span class="p">}</span>
+</span><span id="__span-21-17"><a id="__codelineno-21-17" name="__codelineno-21-17"></a><a href="#__codelineno-21-17"><span class="linenos" data-linenos="17 "></span></a>
+</span><span id="__span-21-18"><a id="__codelineno-21-18" name="__codelineno-21-18"></a><a href="#__codelineno-21-18"><span class="linenos" data-linenos="18 "></span></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-19"><a id="__codelineno-21-19" name="__codelineno-21-19"></a><a href="#__codelineno-21-19"><span class="linenos" data-linenos="19 "></span></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">c_array</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-21-20"><a id="__codelineno-21-20" name="__codelineno-21-20"></a><a href="#__codelineno-21-20"><span class="linenos" data-linenos="20 "></span></a><span class="w">    </span><span class="n">vector</span><span class="w"> </span><span class="n">vec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-21-21"><a id="__codelineno-21-21" name="__codelineno-21-21"></a><a href="#__codelineno-21-21"><span class="linenos" data-linenos="21 "></span></a><span class="w">    </span><span class="n">array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="mi">4</span><span class="o">&gt;</span><span class="w"> </span><span class="n">std_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-21-22"><a id="__codelineno-21-22" name="__codelineno-21-22"></a><a href="#__codelineno-21-22"><span class="linenos" data-linenos="22 "></span></a>
+</span><span id="__span-21-23"><a id="__codelineno-21-23" name="__codelineno-21-23"></a><a href="#__codelineno-21-23"><span class="linenos" data-linenos="23 "></span></a><span class="w">    </span><span class="n">print_ints</span><span class="p">(</span><span class="n">c_array</span><span class="p">);</span>
+</span><span id="__span-21-24"><a id="__codelineno-21-24" name="__codelineno-21-24"></a><a href="#__codelineno-21-24"><span class="linenos" data-linenos="24 "></span></a><span class="w">    </span><span class="n">print_ints</span><span class="p">(</span><span class="n">vec</span><span class="p">);</span>
+</span><span id="__span-21-25"><a id="__codelineno-21-25" name="__codelineno-21-25"></a><a href="#__codelineno-21-25"><span class="linenos" data-linenos="25 "></span></a><span class="w">    </span><span class="n">print_ints</span><span class="p">(</span><span class="n">std_array</span><span class="p">);</span>
+</span><span id="__span-21-26"><a id="__codelineno-21-26" name="__codelineno-21-26"></a><a href="#__codelineno-21-26"><span class="linenos" data-linenos="26 "></span></a><span class="w">    </span><span class="c1">// print_ints({ 9, 8, 7, 6 }); // Error: does not compile</span>
+</span><span id="__span-21-27"><a id="__codelineno-21-27" name="__codelineno-21-27"></a><a href="#__codelineno-21-27"><span class="linenos" data-linenos="27 "></span></a><span class="p">}</span>
+</span></code></pre></div>
+<p>A few things to note about this program:</p>
+<ul>
+<li>
+<p>A range-for loop with an initializer field prints out the values of the <code>std::span</code> parameter, outputting a separator in-between, but not after, the elements. The trick of reassigning the variable <code>sep</code> gets around this limitation of using <code>std::copy()</code>.</p>
+</li>
+<li>
+<p>The three array-like types are initialized in <code>main()</code>. The size of type <code>std::array</code> is fixed at compile-time (from its optional second template parameter) and this allows it to be allocated on the stack, not using any heap memory (as for a built-in array). (Due to the fact that <code>begin()</code> and <code>end()</code> can be used with built-in arrays there are not very many cases where <code>std::array</code> is more useful.)</p>
+</li>
+<li>
+<p>The commented-out call to <code>print_ints()</code> doesn't compile as there is no valid conversion from <code>std::initializer_list&lt;int&gt;</code> to <code>std::span&lt;int&gt;</code>. This is a possible use case for a temporary <code>std::array</code>, as in: <code>print_ints(array{ 9, 8, 7 ,6 });</code></p>
+</li>
+</ul>
+<p>Unlike <code>std::string_view</code>, <code>std::span</code> can modify its elements, even though it does not "own" them. Also, a second form of <code>std::span</code> takes its size parameter after the type, which is also fixed at compile-time.</p>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>Remove the size field (<code>4</code>) from the definition of <code>std_array</code>. What is the inferred size of this <code>std::array</code> now?</p>
+</li>
+<li>
+<p>Perform a sort within <code>print_ints()</code> before outputting.</p>
+</li>
+<li>
+<p>Now output the containers in <code>main()</code> after calling <code>print_ints()</code>, without calling it again. Have the elements of these changed order?</p>
+</li>
+</ul>
+<h2 id="Ordered-and-unordered-sets">Ordered and unordered sets<a class="headerlink" href="#Ordered-and-unordered-sets" title="Permanent link">¶</a></h2>
+<p>A <code>std::set</code> holds its contents in sorted order at all times, thus it is called an <em>ordered container</em>. Occasionally this is desirable, however there are space and time costs to this convenience so before using this container type you should consider whether a <code>std::vector</code>, which can be (manually) sorted when required, is a better solution. Array access (using <code>[]</code>) is not supported for <code>std::set</code>; this may be a deciding factor as to its suitability. Ordered containers require that <code>operator&lt;</code> (less-than) is defined when using them to hold user-defined types (other ordering criteria can be specified, if desired).</p>
+<p>A feature of <code>std::set</code> is that it cannot hold duplicate values; inserting a previously held value does not alter the container, while an initializer list containing duplicates is shortened (and sorted) immediately. (The type <code>std::multiset</code> does allow duplicate values.)</p>
+<p>The following program defines a <code>std::set</code> with value type <code>std::string</code>:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1"></a><a href="#__codelineno-22-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="c1">// 07-set.cpp : demonstrate automatic ordering of a set</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2"></a><a href="#__codelineno-22-2"><span class="linenos" data-linenos=" 2 "></span></a>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3"></a><a href="#__codelineno-22-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4"></a><a href="#__codelineno-22-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5"></a><a href="#__codelineno-22-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;set&gt;</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6"></a><a href="#__codelineno-22-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;algorithm&gt;</span>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7"></a><a href="#__codelineno-22-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iterator&gt;</span>
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8"></a><a href="#__codelineno-22-8"><span class="linenos" data-linenos=" 8 "></span></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9"></a><a href="#__codelineno-22-9"><span class="linenos" data-linenos=" 9 "></span></a>
+</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10"></a><a href="#__codelineno-22-10"><span class="linenos" data-linenos="10 "></span></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-11"><a id="__codelineno-22-11" name="__codelineno-22-11"></a><a href="#__codelineno-22-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="n">set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">{</span>
+</span><span id="__span-22-12"><a id="__codelineno-22-12" name="__codelineno-22-12"></a><a href="#__codelineno-22-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">        </span><span class="s">"Stroustrup, Bjarne"</span><span class="p">,</span>
+</span><span id="__span-22-13"><a id="__codelineno-22-13" name="__codelineno-22-13"></a><a href="#__codelineno-22-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">        </span><span class="s">"Yukihiro, Matsumoto"</span><span class="p">,</span>
+</span><span id="__span-22-14"><a id="__codelineno-22-14" name="__codelineno-22-14"></a><a href="#__codelineno-22-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">        </span><span class="s">"Wall, Larry"</span><span class="p">,</span>
+</span><span id="__span-22-15"><a id="__codelineno-22-15" name="__codelineno-22-15"></a><a href="#__codelineno-22-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">        </span><span class="s">"Eich, Brendan"</span>
+</span><span id="__span-22-16"><a id="__codelineno-22-16" name="__codelineno-22-16"></a><a href="#__codelineno-22-16"><span class="linenos" data-linenos="16 "></span></a><span class="w">    </span><span class="p">};</span>
+</span><span id="__span-22-17"><a id="__codelineno-22-17" name="__codelineno-22-17"></a><a href="#__codelineno-22-17"><span class="linenos" data-linenos="17 "></span></a>
+</span><span id="__span-22-18"><a id="__codelineno-22-18" name="__codelineno-22-18"></a><a href="#__codelineno-22-18"><span class="linenos" data-linenos="18 "></span></a><span class="w">    </span><span class="n">s</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">"Lerdorf, Rasmus"</span><span class="p">);</span>
+</span><span id="__span-22-19"><a id="__codelineno-22-19" name="__codelineno-22-19"></a><a href="#__codelineno-22-19"><span class="linenos" data-linenos="19 "></span></a><span class="w">    </span><span class="n">copy</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="n">ostream_iterator</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="n">cout</span><span class="p">,</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">));</span>
+</span><span id="__span-22-20"><a id="__codelineno-22-20" name="__codelineno-22-20"></a><a href="#__codelineno-22-20"><span class="linenos" data-linenos="20 "></span></a><span class="p">}</span>
+</span></code></pre></div>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>Modify this program so that further names can be added with user input. Is the sorted order preserved?</p>
+</li>
+<li>
+<p>Change the container type to <code>std::multiset</code>. Does the program compile and run? What happens if you (deliberately) enter a duplicate name?</p>
+</li>
+<li>
+<p>The correct ordering depends on the rule of surname first with capitalized first letter. Remove this second restriction by storing all names in lower-case, capitalizing the first letter for output. Test with name: "van Rossum, Guido".</p>
+</li>
+</ul>
+<p>Lookup for <code>std::set</code> is faster than linear searching due to the fact that its elements are always sorted. There is also the container type <code>std::unordered_set</code> which can claim to have constant-time lookup in the best case due to utilization of a <em>hash function</em>. (To complete the quartet, there exists <code>std::unordered_multiset</code>.)</p>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>Modify the original <code>07-set.cpp</code> to use <code>std::unordered_set</code> as the only change.</p>
+</li>
+<li>
+<p>Now add the ability to add subsequent entries from user input, and print out the whole collection on each change. Does anything surprise you?</p>
+</li>
+</ul>
+<p>In fact, due to the way that the <em>unordered containers</em> are implemented, removal or addition of even a single element can change the whole apparent "order" of the elements. Note that a hash function needs to be provided for user-defined types stored in an unordered container (this is achieved by providing a <em>specialization</em> of <code>std::hash</code>).</p>
+<h2 id="Lists-and-forward-lists">Lists and forward-lists<a class="headerlink" href="#Lists-and-forward-lists" title="Permanent link">¶</a></h2>
+<p>Some operations can be inefficient with <code>std::vector</code> because of the way it is implemented by the library; operations such as <code>insert()</code> and <code>erase()</code> can involve the movement of much of the data stored in memory. (In fact this is unavoidable since the Standard dictates that the elements of a <code>std::vector</code> are stored contiguously in memory.) Other operations such as <code>push_front()</code> are not implemented at all, for the same reason. (Using a <code>std::deque</code>, as in "double-ended queue", instead would resolve this particular limitation.)</p>
+<p>The implementation of <code>std::list</code> is fairly straightforward; each element is stored in its own block of assigned memory, together with two pointers; one pointer to the previous element and one pointer to the next element. This does mean that element insertion and deletion can be much quicker than for <code>std::vector</code>, however more memory is used by this container in total (the difference is the size of two pointers times number of elements, approximately). Lists of "large" objects become more efficient than lists of "small" ones, and as for <code>std::vector</code> all elements must be of the same type and size. It follows that the implementation of <code>std::forward_list</code> is similar but with only one pointer in each block, pointing to the next element.</p>
+<p>Some of the operations that <code>std::vector</code> supports, such as indexing using subscript syntax (<code>[]</code>) and <code>std::sort()</code>, are not supported at all, either because performance would be unacceptably poor or because the algorithm requres a <em>random-access iterator</em>. In fact, <code>std::list</code> implements its own member function <code>sort()</code> which performs a <em>stable sort</em> in-place. The iterator type which works with <code>std::list</code> is called a <em>bi-directional iterator</em>, meaning that pointer arithmetic-style operations on iterators cannot work. The iterator type for <code>std::forward_list</code> is called a <em>forward iterator</em>.</p>
+<p>The following program demonstrates both <code>std::forward_list</code> and <code>std::list</code> being used, although it is not intended to be an example of best practice:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1"></a><a href="#__codelineno-23-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="c1">// 07-lists.cpp : forward and bi-directional lists</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2"></a><a href="#__codelineno-23-2"><span class="linenos" data-linenos=" 2 "></span></a>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3"></a><a href="#__codelineno-23-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4"></a><a href="#__codelineno-23-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5"></a><a href="#__codelineno-23-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;forward_list&gt;</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6"></a><a href="#__codelineno-23-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;list&gt;</span>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7"></a><a href="#__codelineno-23-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8"></a><a href="#__codelineno-23-8"><span class="linenos" data-linenos=" 8 "></span></a>
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9"></a><a href="#__codelineno-23-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10"></a><a href="#__codelineno-23-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="n">forward_list</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fwd</span><span class="p">;</span>
+</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11"></a><a href="#__codelineno-23-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fwd</span><span class="p">.</span><span class="n">before_begin</span><span class="p">();</span><span class="w">  </span><span class="c1">// note: member function</span>
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12"></a><a href="#__codelineno-23-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Please enter some words (blank line to end):</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+</span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13"></a><a href="#__codelineno-23-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-14"><a id="__codelineno-23-14" name="__codelineno-23-14"></a><a href="#__codelineno-23-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">        </span><span class="n">string</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
+</span><span id="__span-23-15"><a id="__codelineno-23-15" name="__codelineno-23-15"></a><a href="#__codelineno-23-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">        </span><span class="n">getline</span><span class="p">(</span><span class="n">cin</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">);</span>
+</span><span id="__span-23-16"><a id="__codelineno-23-16" name="__codelineno-23-16"></a><a href="#__codelineno-23-16"><span class="linenos" data-linenos="16 "></span></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-17"><a id="__codelineno-23-17" name="__codelineno-23-17"></a><a href="#__codelineno-23-17"><span class="linenos" data-linenos="17 "></span></a><span class="w">            </span><span class="k">break</span><span class="p">;</span>
+</span><span id="__span-23-18"><a id="__codelineno-23-18" name="__codelineno-23-18"></a><a href="#__codelineno-23-18"><span class="linenos" data-linenos="18 "></span></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-23-19"><a id="__codelineno-23-19" name="__codelineno-23-19"></a><a href="#__codelineno-23-19"><span class="linenos" data-linenos="19 "></span></a><span class="w">        </span><span class="n">fwd</span><span class="p">.</span><span class="n">insert_after</span><span class="p">(</span><span class="n">iter</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">);</span><span class="w">  </span><span class="c1">// note: member function</span>
+</span><span id="__span-23-20"><a id="__codelineno-23-20" name="__codelineno-23-20"></a><a href="#__codelineno-23-20"><span class="linenos" data-linenos="20 "></span></a><span class="w">        </span><span class="o">++</span><span class="n">iter</span><span class="p">;</span><span class="w">                     </span><span class="c1">// note: must "keep up"</span>
+</span><span id="__span-23-21"><a id="__codelineno-23-21" name="__codelineno-23-21"></a><a href="#__codelineno-23-21"><span class="linenos" data-linenos="21 "></span></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-23-22"><a id="__codelineno-23-22" name="__codelineno-23-22"></a><a href="#__codelineno-23-22"><span class="linenos" data-linenos="22 "></span></a>
+</span><span id="__span-23-23"><a id="__codelineno-23-23" name="__codelineno-23-23"></a><a href="#__codelineno-23-23"><span class="linenos" data-linenos="23 "></span></a><span class="w">    </span><span class="n">list</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lst</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">fwd</span><span class="p">),</span><span class="w"> </span><span class="n">end</span><span class="p">(</span><span class="n">fwd</span><span class="p">));</span><span class="w"> </span><span class="c1">// copy fwd into lst</span>
+</span><span id="__span-23-24"><a id="__codelineno-23-24" name="__codelineno-23-24"></a><a href="#__codelineno-23-24"><span class="linenos" data-linenos="24 "></span></a><span class="w">    </span><span class="n">lst</span><span class="p">.</span><span class="n">sort</span><span class="p">();</span>
+</span><span id="__span-23-25"><a id="__codelineno-23-25" name="__codelineno-23-25"></a><a href="#__codelineno-23-25"><span class="linenos" data-linenos="25 "></span></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">lst</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-26"><a id="__codelineno-23-26" name="__codelineno-23-26"></a><a href="#__codelineno-23-26"><span class="linenos" data-linenos="26 "></span></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"- "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+</span><span id="__span-23-27"><a id="__codelineno-23-27" name="__codelineno-23-27"></a><a href="#__codelineno-23-27"><span class="linenos" data-linenos="27 "></span></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-23-28"><a id="__codelineno-23-28" name="__codelineno-23-28"></a><a href="#__codelineno-23-28"><span class="linenos" data-linenos="28 "></span></a><span class="p">}</span>
+</span></code></pre></div>
+<p>A few new things about this program:</p>
+<ul>
+<li>
+<p>There are two lists, a <code>std::forward_list</code> called <code>fwd</code> and a <code>std::list</code> called <code>lst</code>.</p>
+</li>
+<li>
+<p>The variable <code>iter</code> is initialized by member function <code>before_begin()</code>, this is unique to <code>std::forward_list</code>.</p>
+</li>
+<li>
+<p>In the first loop the <code>std::string</code> in variable <code>s</code> is inserted after <code>iter</code>'s position using member function <code>insert_after()</code>.</p>
+</li>
+<li>
+<p>The variable <code>iter</code> is then incremented, still in the first loop.</p>
+</li>
+<li>
+<p>The empty <code>std::list</code> is initialized from the <code>begin()</code> and <code>end()</code> of <code>fwd</code>. This is the standard way of making a copy of a container.</p>
+</li>
+<li>
+<p>Member function <code>sort()</code> is called on <code>lst</code>, which is then printed out.</p>
+</li>
+</ul>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>Consider how to memberwise compare <code>fwd</code> and <code>lst</code>.</p>
+</li>
+<li>
+<p>Since the input is to be sorted eventually, experiment with other ways of populating <code>fwd</code>. Hint: consider <code>push_front()</code>.</p>
+</li>
+<li>
+<p>Now find a way to avoid the use of <code>fwd</code> altogether.</p>
+</li>
+</ul>
+<h2 id="Ordered-and-unordered-maps">Ordered and unordered maps<a class="headerlink" href="#Ordered-and-unordered-maps" title="Permanent link">¶</a></h2>
+<p>All of the containers seen so far have stored a number of elements of a single type. There has been no other information stored with the element, except possibly for <code>std::vector</code> where the first element <em>implicitly</em> has index <code>0</code>, the second has index <code>1</code> and so on. This index can be thought of as the <em>key</em> as it allows direct access to a single <em>value</em>.</p>
+<p>This can be generalized so that the key can be of any type, not just a sequence of advancing integers. In C++ all maps operate with a type called <code>std::pair</code> which as might be guessed has two fields; these are called <code>first</code> and <code>second</code>. We could define <code>std::pair</code> as follows (see Chapter 10 for a discussion of the <code>template</code> and <code>typename</code> keywords):</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1"></a><a href="#__codelineno-24-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Key</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Value</span><span class="o">&gt;</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2"></a><a href="#__codelineno-24-2"><span class="linenos" data-linenos="2 "></span></a><span class="k">struct</span><span class="w"> </span><span class="nc">pair</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3"></a><a href="#__codelineno-24-3"><span class="linenos" data-linenos="3 "></span></a><span class="w">    </span><span class="n">Key</span><span class="w"> </span><span class="n">first</span><span class="p">;</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4"></a><a href="#__codelineno-24-4"><span class="linenos" data-linenos="4 "></span></a><span class="w">    </span><span class="n">Value</span><span class="w"> </span><span class="n">second</span><span class="p">;</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5"></a><a href="#__codelineno-24-5"><span class="linenos" data-linenos="5 "></span></a><span class="p">};</span>
+</span></code></pre></div>
+<p>However we don't need to do this as the Standard Library provides this definition in header <code>&lt;utility&gt;</code> (or one very similar, the exact implementation details are not important). Maps operate on collections of <em>key/value pairs</em> which are provided by this type.</p>
+<p>The first <em>associative container</em> we will look at is <code>std::map</code>. The following program uses a <code>std::map</code> to hold the per-weight prices of a list of fruits, which can be added to during a run of the program:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1"></a><a href="#__codelineno-25-1"><span class="linenos" data-linenos=" 1 "></span></a><span class="c1">// 07-map.cpp : calculate prices from associative array of products and per-weight cost</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2"></a><a href="#__codelineno-25-2"><span class="linenos" data-linenos=" 2 "></span></a>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3"></a><a href="#__codelineno-25-3"><span class="linenos" data-linenos=" 3 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4"></a><a href="#__codelineno-25-4"><span class="linenos" data-linenos=" 4 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5"></a><a href="#__codelineno-25-5"><span class="linenos" data-linenos=" 5 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cctype&gt;</span>
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6"></a><a href="#__codelineno-25-6"><span class="linenos" data-linenos=" 6 "></span></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;map&gt;</span>
+</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7"></a><a href="#__codelineno-25-7"><span class="linenos" data-linenos=" 7 "></span></a><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+</span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8"></a><a href="#__codelineno-25-8"><span class="linenos" data-linenos=" 8 "></span></a>
+</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9"></a><a href="#__codelineno-25-9"><span class="linenos" data-linenos=" 9 "></span></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-10"><a id="__codelineno-25-10" name="__codelineno-25-10"></a><a href="#__codelineno-25-10"><span class="linenos" data-linenos="10 "></span></a><span class="w">    </span><span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">products</span><span class="p">{</span>
+</span><span id="__span-25-11"><a id="__codelineno-25-11" name="__codelineno-25-11"></a><a href="#__codelineno-25-11"><span class="linenos" data-linenos="11 "></span></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">"Apples"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.65</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-25-12"><a id="__codelineno-25-12" name="__codelineno-25-12"></a><a href="#__codelineno-25-12"><span class="linenos" data-linenos="12 "></span></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">"Oranges"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.85</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-25-13"><a id="__codelineno-25-13" name="__codelineno-25-13"></a><a href="#__codelineno-25-13"><span class="linenos" data-linenos="13 "></span></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">"Bananas"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.45</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-25-14"><a id="__codelineno-25-14" name="__codelineno-25-14"></a><a href="#__codelineno-25-14"><span class="linenos" data-linenos="14 "></span></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">"Pears"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.50</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-25-15"><a id="__codelineno-25-15" name="__codelineno-25-15"></a><a href="#__codelineno-25-15"><span class="linenos" data-linenos="15 "></span></a><span class="w">    </span><span class="p">};</span>
+</span><span id="__span-25-16"><a id="__codelineno-25-16" name="__codelineno-25-16"></a><a href="#__codelineno-25-16"><span class="linenos" data-linenos="16 "></span></a><span class="w">    </span><span class="n">cout</span><span class="p">.</span><span class="n">precision</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span><span id="__span-25-17"><a id="__codelineno-25-17" name="__codelineno-25-17"></a><a href="#__codelineno-25-17"><span class="linenos" data-linenos="17 "></span></a><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">fixed</span><span class="p">;</span>
+</span><span id="__span-25-18"><a id="__codelineno-25-18" name="__codelineno-25-18"></a><a href="#__codelineno-25-18"><span class="linenos" data-linenos="18 "></span></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-19"><a id="__codelineno-25-19" name="__codelineno-25-19"></a><a href="#__codelineno-25-19"><span class="linenos" data-linenos="19 "></span></a><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Please choose: Add product, Calculate price, Quit</span><span class="se">\n</span><span class="s">Enter one of A, C, Q: "</span><span class="p">;</span>
+</span><span id="__span-25-20"><a id="__codelineno-25-20" name="__codelineno-25-20"></a><a href="#__codelineno-25-20"><span class="linenos" data-linenos="20 "></span></a><span class="w">        </span><span class="kt">char</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
+</span><span id="__span-25-21"><a id="__codelineno-25-21" name="__codelineno-25-21"></a><a href="#__codelineno-25-21"><span class="linenos" data-linenos="21 "></span></a><span class="w">        </span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
+</span><span id="__span-25-22"><a id="__codelineno-25-22" name="__codelineno-25-22"></a><a href="#__codelineno-25-22"><span class="linenos" data-linenos="22 "></span></a><span class="w">        </span><span class="n">opt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">toupper</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
+</span><span id="__span-25-23"><a id="__codelineno-25-23" name="__codelineno-25-23"></a><a href="#__codelineno-25-23"><span class="linenos" data-linenos="23 "></span></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">opt</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">'Q'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-24"><a id="__codelineno-25-24" name="__codelineno-25-24"></a><a href="#__codelineno-25-24"><span class="linenos" data-linenos="24 "></span></a><span class="w">            </span><span class="k">break</span><span class="p">;</span>
+</span><span id="__span-25-25"><a id="__codelineno-25-25" name="__codelineno-25-25"></a><a href="#__codelineno-25-25"><span class="linenos" data-linenos="25 "></span></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-25-26"><a id="__codelineno-25-26" name="__codelineno-25-26"></a><a href="#__codelineno-25-26"><span class="linenos" data-linenos="26 "></span></a><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">opt</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">'A'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-27"><a id="__codelineno-25-27" name="__codelineno-25-27"></a><a href="#__codelineno-25-27"><span class="linenos" data-linenos="27 "></span></a><span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Enter product and price-per-kilo: "</span><span class="p">;</span>
+</span><span id="__span-25-28"><a id="__codelineno-25-28" name="__codelineno-25-28"></a><a href="#__codelineno-25-28"><span class="linenos" data-linenos="28 "></span></a><span class="w">            </span><span class="n">string</span><span class="w"> </span><span class="n">product</span><span class="p">;</span>
+</span><span id="__span-25-29"><a id="__codelineno-25-29" name="__codelineno-25-29"></a><a href="#__codelineno-25-29"><span class="linenos" data-linenos="29 "></span></a><span class="w">            </span><span class="kt">double</span><span class="w"> </span><span class="n">price</span><span class="p">;</span>
+</span><span id="__span-25-30"><a id="__codelineno-25-30" name="__codelineno-25-30"></a><a href="#__codelineno-25-30"><span class="linenos" data-linenos="30 "></span></a><span class="w">            </span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">price</span><span class="p">;</span>
+</span><span id="__span-25-31"><a id="__codelineno-25-31" name="__codelineno-25-31"></a><a href="#__codelineno-25-31"><span class="linenos" data-linenos="31 "></span></a><span class="w">            </span><span class="n">product</span><span class="p">.</span><span class="n">front</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">toupper</span><span class="p">(</span><span class="n">product</span><span class="p">.</span><span class="n">front</span><span class="p">());</span>
+</span><span id="__span-25-32"><a id="__codelineno-25-32" name="__codelineno-25-32"></a><a href="#__codelineno-25-32"><span class="linenos" data-linenos="32 "></span></a><span class="w">            </span><span class="n">products</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">pair</span><span class="p">{</span><span class="w"> </span><span class="n">product</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="p">});</span>
+</span><span id="__span-25-33"><a id="__codelineno-25-33" name="__codelineno-25-33"></a><a href="#__codelineno-25-33"><span class="linenos" data-linenos="33 "></span></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-25-34"><a id="__codelineno-25-34" name="__codelineno-25-34"></a><a href="#__codelineno-25-34"><span class="linenos" data-linenos="34 "></span></a><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">opt</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">'C'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-35"><a id="__codelineno-25-35" name="__codelineno-25-35"></a><a href="#__codelineno-25-35"><span class="linenos" data-linenos="35 "></span></a><span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">products</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-36"><a id="__codelineno-25-36" name="__codelineno-25-36"></a><a href="#__codelineno-25-36"><span class="linenos" data-linenos="36 "></span></a><span class="w">                </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">first</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\t'</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"/kg</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+</span><span id="__span-25-37"><a id="__codelineno-25-37" name="__codelineno-25-37"></a><a href="#__codelineno-25-37"><span class="linenos" data-linenos="37 "></span></a><span class="w">            </span><span class="p">}</span><span class="w"> </span>
+</span><span id="__span-25-38"><a id="__codelineno-25-38" name="__codelineno-25-38"></a><a href="#__codelineno-25-38"><span class="linenos" data-linenos="38 "></span></a><span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Enter product and quantity: "</span><span class="p">;</span>
+</span><span id="__span-25-39"><a id="__codelineno-25-39" name="__codelineno-25-39"></a><a href="#__codelineno-25-39"><span class="linenos" data-linenos="39 "></span></a><span class="w">            </span><span class="n">string</span><span class="w"> </span><span class="n">product</span><span class="p">;</span>
+</span><span id="__span-25-40"><a id="__codelineno-25-40" name="__codelineno-25-40"></a><a href="#__codelineno-25-40"><span class="linenos" data-linenos="40 "></span></a><span class="w">            </span><span class="kt">double</span><span class="w"> </span><span class="n">quantity</span><span class="p">;</span>
+</span><span id="__span-25-41"><a id="__codelineno-25-41" name="__codelineno-25-41"></a><a href="#__codelineno-25-41"><span class="linenos" data-linenos="41 "></span></a><span class="w">            </span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">quantity</span><span class="p">;</span>
+</span><span id="__span-25-42"><a id="__codelineno-25-42" name="__codelineno-25-42"></a><a href="#__codelineno-25-42"><span class="linenos" data-linenos="42 "></span></a><span class="w">            </span><span class="n">product</span><span class="p">.</span><span class="n">front</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">toupper</span><span class="p">(</span><span class="n">product</span><span class="p">.</span><span class="n">front</span><span class="p">());</span>
+</span><span id="__span-25-43"><a id="__codelineno-25-43" name="__codelineno-25-43"></a><a href="#__codelineno-25-43"><span class="linenos" data-linenos="43 "></span></a><span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">products</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">product</span><span class="p">);</span>
+</span><span id="__span-25-44"><a id="__codelineno-25-44" name="__codelineno-25-44"></a><a href="#__codelineno-25-44"><span class="linenos" data-linenos="44 "></span></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">iter</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">end</span><span class="p">(</span><span class="n">products</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-45"><a id="__codelineno-25-45" name="__codelineno-25-45"></a><a href="#__codelineno-25-45"><span class="linenos" data-linenos="45 "></span></a><span class="w">                </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Price: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">iter</span><span class="o">-&gt;</span><span class="n">second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">quantity</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">'\n'</span><span class="p">;</span>
+</span><span id="__span-25-46"><a id="__codelineno-25-46" name="__codelineno-25-46"></a><a href="#__codelineno-25-46"><span class="linenos" data-linenos="46 "></span></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-25-47"><a id="__codelineno-25-47" name="__codelineno-25-47"></a><a href="#__codelineno-25-47"><span class="linenos" data-linenos="47 "></span></a><span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-48"><a id="__codelineno-25-48" name="__codelineno-25-48"></a><a href="#__codelineno-25-48"><span class="linenos" data-linenos="48 "></span></a><span class="w">                </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Could not find </span><span class="se">\"</span><span class="s">"</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"</span><span class="se">\"\n</span><span class="s">"</span><span class="p">;</span>
+</span><span id="__span-25-49"><a id="__codelineno-25-49" name="__codelineno-25-49"></a><a href="#__codelineno-25-49"><span class="linenos" data-linenos="49 "></span></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-25-50"><a id="__codelineno-25-50" name="__codelineno-25-50"></a><a href="#__codelineno-25-50"><span class="linenos" data-linenos="50 "></span></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-25-51"><a id="__codelineno-25-51" name="__codelineno-25-51"></a><a href="#__codelineno-25-51"><span class="linenos" data-linenos="51 "></span></a><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-52"><a id="__codelineno-25-52" name="__codelineno-25-52"></a><a href="#__codelineno-25-52"><span class="linenos" data-linenos="52 "></span></a><span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Option not recognized.</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+</span><span id="__span-25-53"><a id="__codelineno-25-53" name="__codelineno-25-53"></a><a href="#__codelineno-25-53"><span class="linenos" data-linenos="53 "></span></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-25-54"><a id="__codelineno-25-54" name="__codelineno-25-54"></a><a href="#__codelineno-25-54"><span class="linenos" data-linenos="54 "></span></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-25-55"><a id="__codelineno-25-55" name="__codelineno-25-55"></a><a href="#__codelineno-25-55"><span class="linenos" data-linenos="55 "></span></a><span class="p">}</span>
+</span></code></pre></div>
+<p>This is a longer program but does not contain much that is new. A few points to note:</p>
+<ul>
+<li>
+<p>The <code>std::map</code> called <code>products</code> is initialized from a nested initializer list, and the key and value types must be specified within the angle brackets. The output of floating point numbers is fixed to two decimal places.</p>
+</li>
+<li>
+<p>With user option <code>A</code>, member function <code>insert()</code> is called with a (temporary) <code>std::pair</code>. This is usually preferred over using array subscript syntax, while <code>products[product] = price</code> would work in most cases it is not always the most efficient method.</p>
+</li>
+<li>
+<p>With user option <code>C</code>, all of the products are printed out by a range-for loop which iterates over <code>products</code> and outputs the <code>first</code> and <code>second</code> fields of each element. Then member function <code>find()</code> is called to obtain an iterator. This is compared against <code>end(products)</code> (which if equal would indicate "not found"), being other than this allows the <strong>value</strong> part as <code>iter-&gt;second</code> to be retrieved (the <strong>key</strong> would be available as <code>iter-&gt;first</code>).</p>
+</li>
+</ul>
+<p>As explained above, use of array syntax is not used by this program when adding an entry, nor is it advisable in most cases for element lookup:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1"></a><a href="#__codelineno-26-1"><span class="linenos" data-linenos="1 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">price_per_product1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">products</span><span class="p">[</span><span class="s">"Apples"</span><span class="p">];</span><span class="w">      </span><span class="c1">// would work, but find() is better</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2"></a><a href="#__codelineno-26-2"><span class="linenos" data-linenos="2 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">price_per_product2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">products</span><span class="p">[</span><span class="s">"Missing1"</span><span class="p">];</span><span class="w">    </span><span class="c1">// Warning: creates entry with key "Missing1" and value 0.0</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3"></a><a href="#__codelineno-26-3"><span class="linenos" data-linenos="3 "></span></a><span class="k">auto</span><span class="w"> </span><span class="n">price_per_product3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">products</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="s">"Missing2"</span><span class="p">);</span><span class="w"> </span><span class="c1">// Warning: might throw an exception, which would need to be caught</span>
+</span></code></pre></div>
+<p><strong>Experiment</strong></p>
+<ul>
+<li>
+<p>What happens if you try to change an existing entry with a different price-per-kilo? Can you discover a way to warn the user?</p>
+</li>
+<li>
+<p>Use <code>std::unordered_map</code> instead of <code>std::map</code>. Does the program still compile and run? What is the effect of adding one or more products to the order in which they are output?</p>
+</li>
+</ul>
+<p>To complete the list of associative containers, <code>std::multimap</code> and <code>std::unordered_multimap</code> allow duplicate occurences of keys with the same or different values, thus <code>insert()</code> always succeeds.</p>
+<h2 id="Other-containers-and-adaptors">Other containers and adaptors<a class="headerlink" href="#Other-containers-and-adaptors" title="Permanent link">¶</a></h2>
+<p>There are some other containers and <em>container adaptors</em> implemented in the Standard Library:</p>
+<ul>
+<li>
+<p><code>std::vector&lt;bool&gt;</code> is a specialization of <code>std::vector</code> that stores binary bits as packed data</p>
+</li>
+<li>
+<p><code>std::bitset</code> also stores binary bits, but has its size fixed at compile-time</p>
+</li>
+<li>
+<p><code>std::deque</code> (pronounced "deck") implements a double-ended container similar to <code>std::vector</code>, but with additional operations such as <code>push_front()</code></p>
+</li>
+<li>
+<p><code>std::stack</code> implements a LIFO (Last In First Out)</p>
+</li>
+<li>
+<p><code>std::queue</code> implements a FIFO (First In First Out)</p>
+</li>
+<li>
+<p><code>std::priority_queue</code> implements a FIFO that sorts by age and priority</p>
+</li>
+<li>
+<p><code>std::flat_set</code> implements a sorted container of unique values, typically implemented as a vector</p>
+</li>
+<li>
+<p><code>std::flat_map</code> implements a sorted associative container, typically implemented as two vectors (one for keys and one for values)</p>
+</li>
+</ul>
+<p>A brief Tutorial such as this is not the place to delve into these, and indeed the other containers covered in this Chapter have much more detail to discover. As a go-to for both tutorial and reference I can highly recommend <a href="https://en.cppreference.com">CppReference.com</a><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> and <a href="http://cppstdlib.com">Josuttis, "The C++ Standard Library"</a><sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>.</p>
+<p><em>All text and program code ©2019-2025 Richard Spencer, all rights reserved.</em></p>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>https://en.cppreference.com&nbsp;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:2">
+<p>http://cppstdlib.com&nbsp;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+          <div class="md-top" data-md-component="top" hidden="">
+  <div class="md-top__center">
+    <button type="button" class="md-top__button md-top__button--main" data-md-action="top">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+      <span>回到页面顶部</span>
+    </button>
+    
+      
+      
+      <label class="md-top__button md-top__side md-top__side--nav" for="__drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 14H9V6h11Z"></path></svg>
+      </label>
+    
+    
+      
+      
+      <label class="md-top__button md-top__side md-top__side--toc" for="__toc">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m-5 14H4V6h11Z"></path></svg>
+      </label>
+    
+  </div>
+</div>
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2025 | 🚀 Aaron Wang
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/jaywhj" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="mailto:junewhj@qq.com" target="_blank" rel="noopener" title="Email" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20 8-8 5-8-5V6l8 5 8-5m0-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"></path></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.top", "navigation.footer", "content.code.copy", "content.tooltips", "content.footnote.tooltips", "search.highlight", "toc.follow"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e3ad5d0a.min.js"></script>
+      
+        <script src="../assets/document_dates/core/timeago.full.min.js"></script>
+      
+        <script src="../javascripts/translate.min.js"></script>
+      
+        <script src="../javascripts/extra.js"></script>
+      
+        <script src="../site-plugin/katex/katex.js"></script>
+      
+        <script src="../site-plugin/katex/katex.min.js"></script>
+      
+        <script src="../site-plugin/katex/auto-render.min.js"></script>
+      
+        <script src="../site-plugin/katex/mhchem.min.js"></script>
+      
+        <script src="../assets/document_dates/tippy/popper.min.js"></script>
+      
+        <script src="../assets/document_dates/tippy/tippy.umd.min.js"></script>
+      
+        <script src="../assets/document_dates/core/md5.min.js"></script>
+      
+        <script src="../assets/document_dates/core/default.config.js"></script>
+      
+        <script src="../assets/document_dates/user.config.js"></script>
+      
+        <script src="../assets/document_dates/core/utils.js"></script>
+      
+        <script src="../assets/document_dates/core/core.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</script></body></html>
