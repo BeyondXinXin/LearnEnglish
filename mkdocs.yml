@@ -114,21 +114,6 @@ markdown_extensions:
       slugify: !!python/object/apply:pymdownx.slugs.slugify {} # 锚点链接：统一字符编码，区分大小写
       # slugify: !!python/object/apply:pymdownx.slugs.slugify {kwds: {case: lower}}
 
-# 额外配置板块
-extra:
-  generator: false # 隐藏页脚 “Made with Material for MkDocs”
-  social: # 右下角的社交按钮
-    - icon: fontawesome/brands/edge
-      link: https://www.beyondxin.top/
-    - icon: fontawesome/brands/bilibili
-      link: https://space.bilibili.com/285016963
-
-  # 多语言选择（可随意增删）
-  alternate:
-    - name: 🇨🇳 中文
-      lang: zh
-    - name: 🇺🇸 English
-      lang: en
 
 # 插件板块
 plugins:
